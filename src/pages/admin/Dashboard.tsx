@@ -179,10 +179,10 @@ const AdminDashboard = () => {
                 <CardTitle>Quick Actions</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <Button variant="outline" className="w-full justify-start">
-                  <IndianRupee className="h-4 w-4 mr-2" />
-                  Update Payment
-                </Button>
+              <Button onClick={() => navigate("/admin/payment-update")} variant="outline" className="w-full justify-start">
+                <IndianRupee className="h-4 w-4 mr-2" />
+                Update Payment
+              </Button>
                 <Button variant="outline" className="w-full justify-start">
                   <FileText className="h-4 w-4 mr-2" />
                   Generate Report

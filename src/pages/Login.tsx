@@ -79,7 +79,7 @@ const Login = () => {
                 </div>
                 <div className="flex items-center justify-between text-sm">
                   <a href="#" className="text-primary hover:underline">Forgot password?</a>
-                  <a href="#" className="text-primary hover:underline">New user? Register</a>
+                  <button onClick={() => navigate("/register")} className="text-primary hover:underline">New user? Register</button>
                 </div>
                 <Button 
                   onClick={() => handleLogin("User")} 

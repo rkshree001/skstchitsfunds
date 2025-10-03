@@ -209,7 +209,7 @@ const Index = () => {
             <div>
               <h4 className="font-semibold mb-3">Quick Links</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#about" className="hover:text-foreground transition-colors">About Us</a></li>
+                <li><button onClick={() => navigate("/about")} className="hover:text-foreground transition-colors">About Us</button></li>
                 <li><a href="#how-it-works" className="hover:text-foreground transition-colors">How It Works</a></li>
                 <li><button onClick={() => navigate("/calculator")} className="hover:text-foreground transition-colors">Calculator</button></li>
               </ul>
@@ -218,8 +218,8 @@ const Index = () => {
               <h4 className="font-semibold mb-3">Support</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><button onClick={() => navigate("/support")} className="hover:text-foreground transition-colors">Help Center</button></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Terms & Conditions</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a></li>
+                <li><button onClick={() => navigate("/terms")} className="hover:text-foreground transition-colors">Terms & Conditions</button></li>
+                <li><button onClick={() => navigate("/terms")} className="hover:text-foreground transition-colors">Privacy Policy</button></li>
               </ul>
             </div>
             <div>

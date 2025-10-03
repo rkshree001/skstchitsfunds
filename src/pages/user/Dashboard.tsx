@@ -157,7 +157,17 @@ const UserDashboard = () => {
                 <HelpCircle className="h-4 w-4 mr-2" />
                 Support & Help
               </Button>
-              <Button variant="default" className="w-full">
+              <Button 
+                variant="default" 
+                className="w-full"
+                onClick={() => {
+                  // Mock payment
+                  const confirmed = window.confirm("Proceed with payment of ₹10,000?\n\nPayment Method: UPI/Net Banking");
+                  if (confirmed) {
+                    alert("✓ Payment Successful!\n\nTransaction ID: TXN" + Date.now() + "\nAmount: ₹10,000\nDate: " + new Date().toLocaleDateString());
+                  }
+                }}
+              >
                 <IndianRupee className="h-4 w-4 mr-2" />
                 Pay Premium Now
               </Button>
