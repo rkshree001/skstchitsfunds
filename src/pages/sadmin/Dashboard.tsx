@@ -115,9 +115,9 @@ const SuperAdminDashboard = () => {
                 </CardTitle>
                 <CardDescription>Manage all branch operations and performance</CardDescription>
               </div>
-              <Button variant="default">
+              <Button onClick={() => navigate("/sadmin/branch-management")} variant="default">
                 <Building2 className="h-4 w-4 mr-2" />
-                Add Branch
+                Manage Branches
               </Button>
             </div>
           </CardHeader>

@@ -14,6 +14,13 @@ import UserDashboard from "./pages/user/Dashboard";
 import AdminDashboard from "./pages/admin/Dashboard";
 import PaymentUpdate from "./pages/admin/PaymentUpdate";
 import SuperAdminDashboard from "./pages/sadmin/Dashboard";
+import BranchManagement from "./pages/sadmin/BranchManagement";
+import AddBranch from "./pages/sadmin/AddBranch";
+import UserManagement from "./pages/admin/UserManagement";
+import AddUser from "./pages/admin/AddUser";
+import UserTransactions from "./pages/user/Transactions";
+import SupportLogin from "./pages/support/Login";
+import SupportDashboard from "./pages/support/Dashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,9 +40,16 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/user/dashboard" element={<UserDashboard />} />
+          <Route path="/user/transactions" element={<UserTransactions />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/payment-update" element={<PaymentUpdate />} />
+          <Route path="/admin/user-management" element={<UserManagement />} />
+          <Route path="/admin/add-user" element={<AddUser />} />
           <Route path="/sadmin/dashboard" element={<SuperAdminDashboard />} />
+          <Route path="/sadmin/branch-management" element={<BranchManagement />} />
+          <Route path="/sadmin/add-branch" element={<AddBranch />} />
+          <Route path="/support/login" element={<SupportLogin />} />
+          <Route path="/support/dashboard" element={<SupportDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

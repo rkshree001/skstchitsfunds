@@ -41,6 +41,9 @@ const Index = () => {
               <Button onClick={() => navigate("/calculator")} size="lg" variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
                 Calculate Returns
               </Button>
+              <Button onClick={() => navigate("/support/login")} size="lg" variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
+                Support Portal
+              </Button>
             </div>
           </div>
         </div>
