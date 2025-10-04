@@ -2,7 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
-import { LogOut, Building2, Users, IndianRupee, TrendingUp, Shield, Settings } from "lucide-react";
+import { LogOut, Building2, Users, IndianRupee, TrendingUp, Shield, Settings, BarChart3, PieChart, Activity } from "lucide-react";
+import { LineChart, Line, BarChart, Bar, PieChart as RePieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from "recharts";
 
 const SuperAdminDashboard = () => {
   const navigate = useNavigate();
@@ -27,6 +28,31 @@ const SuperAdminDashboard = () => {
     { id: 2, role: "Branch Admin", count: 5, permissions: "Branch Management" },
     { id: 3, role: "Manager", count: 10, permissions: "User Management" },
     { id: 4, role: "User", count: 500, permissions: "View Only" },
+  ];
+
+  const monthlyGrowthData = [
+    { month: "Jan", users: 400, collections: 4000000 },
+    { month: "Feb", users: 420, collections: 4200000 },
+    { month: "Mar", users: 450, collections: 4500000 },
+    { month: "Apr", users: 470, collections: 4700000 },
+    { month: "May", users: 480, collections: 4800000 },
+    { month: "Jun", users: 500, collections: 5000000 },
+  ];
+
+  const branchPerformance = [
+    { branch: "Mumbai", collections: 1500000, users: 150 },
+    { branch: "Pune", collections: 1200000, users: 120 },
+    { branch: "Bangalore", collections: 1400000, users: 130 },
+    { branch: "Delhi", collections: 800000, users: 80 },
+    { branch: "Chennai", collections: 100000, users: 20 },
+  ];
+
+  const systemHealth = [
+    { metric: "Uptime", value: 99.9 },
+    { metric: "Performance", value: 95 },
+    { metric: "Security", value: 98 },
+    { metric: "Reliability", value: 97 },
+    { metric: "Efficiency", value: 89 },
   ];
 
   return (
@@ -156,6 +182,78 @@ const SuperAdminDashboard = () => {
                 </tbody>
               </table>
             </div>
+          </CardContent>
+        </Card>
+
+        {/* Analytics Section */}
+        <div className="grid lg:grid-cols-2 gap-6 mb-8">
+          {/* Growth Trend */}
+          <Card className="shadow-medium">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <TrendingUp className="h-5 w-5" />
+                System Growth Trend
+              </CardTitle>
+              <CardDescription>Users and collections over time</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={300}>
+                <AreaChart data={monthlyGrowthData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis yAxisId="left" />
+                  <YAxis yAxisId="right" orientation="right" />
+                  <Tooltip />
+                  <Legend />
+                  <Area yAxisId="left" type="monotone" dataKey="users" stackId="1" stroke="#1e40af" fill="#1e40af" />
+                  <Area yAxisId="right" type="monotone" dataKey="collections" stackId="2" stroke="#10b981" fill="#10b981" opacity={0.6} />
+                </AreaChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+
+          {/* Branch Performance */}
+          <Card className="shadow-medium">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <BarChart3 className="h-5 w-5" />
+                Branch Performance
+              </CardTitle>
+              <CardDescription>Collections by branch</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={branchPerformance}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="branch" />
+                  <YAxis />
+                  <Tooltip />
+                  <Bar dataKey="collections" fill="#1e40af" />
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* System Health Radar */}
+        <Card className="shadow-medium mb-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Activity className="h-5 w-5" />
+              System Health Overview
+            </CardTitle>
+            <CardDescription>Comprehensive system performance metrics</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ResponsiveContainer width="100%" height={350}>
+              <RadarChart data={systemHealth}>
+                <PolarGrid />
+                <PolarAngleAxis dataKey="metric" />
+                <PolarRadiusAxis angle={90} domain={[0, 100]} />
+                <Radar name="Performance" dataKey="value" stroke="#1e40af" fill="#1e40af" fillOpacity={0.6} />
+                <Tooltip />
+              </RadarChart>
+            </ResponsiveContainer>
           </CardContent>
         </Card>
 

@@ -2,7 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
-import { LogOut, Calculator, Receipt, HelpCircle, TrendingUp, Calendar, IndianRupee } from "lucide-react";
+import { LogOut, Calculator, Receipt, HelpCircle, TrendingUp, Calendar, IndianRupee, PieChart, BarChart3, Wallet } from "lucide-react";
+import { LineChart, Line, BarChart, Bar, PieChart as RePieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 const UserDashboard = () => {
   const navigate = useNavigate();
@@ -38,6 +39,26 @@ const UserDashboard = () => {
     { id: 3, date: "15 Apr 2024", type: "Premium Payment", amount: 10000, status: "completed" },
     { id: 4, date: "15 Mar 2024", type: "Premium Payment", amount: 10000, status: "completed" },
     { id: 5, date: "15 Feb 2024", type: "Premium Payment", amount: 10000, status: "completed" },
+  ];
+
+  const paymentTrendData = [
+    { month: "Jan", amount: 10000 },
+    { month: "Feb", amount: 10000 },
+    { month: "Mar", amount: 10000 },
+    { month: "Apr", amount: 10000 },
+    { month: "May", amount: 10000 },
+    { month: "Jun", amount: 10000 },
+  ];
+
+  const savingsBreakdown = [
+    { name: "Paid", value: 60000, color: "#10b981" },
+    { name: "Remaining", value: 60000, color: "#f59e0b" },
+  ];
+
+  const performanceData = [
+    { metric: "On-Time Payments", value: 100 },
+    { metric: "Expected Returns", value: 85 },
+    { metric: "Completion Rate", value: 50 },
   ];
 
   return (
@@ -199,6 +220,92 @@ const UserDashboard = () => {
                   <Badge variant={month.status === "paid" ? "default" : "secondary"} className={month.status === "paid" ? "bg-success" : ""}>
                     {month.status === "paid" ? "Paid" : "Pending"}
                   </Badge>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Analytics Section */}
+        <div className="grid lg:grid-cols-2 gap-6 mb-8">
+          {/* Payment Trend Chart */}
+          <Card className="shadow-medium">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <BarChart3 className="h-5 w-5" />
+                Payment Trend
+              </CardTitle>
+              <CardDescription>Monthly premium payment history</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={250}>
+                <LineChart data={paymentTrendData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip />
+                  <Line type="monotone" dataKey="amount" stroke="#1e40af" strokeWidth={2} />
+                </LineChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+
+          {/* Savings Breakdown */}
+          <Card className="shadow-medium">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <PieChart className="h-5 w-5" />
+                Savings Breakdown
+              </CardTitle>
+              <CardDescription>Total chit fund status</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={250}>
+                <RePieChart>
+                  <Pie
+                    data={savingsBreakdown}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    label={(entry: any) => `${entry.name}: ₹${(entry.value / 1000).toFixed(0)}K`}
+                    outerRadius={80}
+                    fill="#8884d8"
+                    dataKey="value"
+                  >
+                    {savingsBreakdown.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </RePieChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Performance Metrics */}
+        <Card className="shadow-medium mb-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Wallet className="h-5 w-5" />
+              Performance Metrics
+            </CardTitle>
+            <CardDescription>Your chit fund performance indicators</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {performanceData.map((item, idx) => (
+                <div key={idx}>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium">{item.metric}</span>
+                    <span className="text-sm font-bold">{item.value}%</span>
+                  </div>
+                  <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-success rounded-full transition-all"
+                      style={{ width: `${item.value}%` }}
+                    ></div>
+                  </div>
                 </div>
               ))}
             </div>

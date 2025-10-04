@@ -3,8 +3,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
-import { LogOut, Search, Filter, MessageSquare, CheckCircle, Clock, AlertCircle } from "lucide-react";
+import { LogOut, Search, Filter, MessageSquare, CheckCircle, Clock, AlertCircle, TrendingUp, BarChart3, PieChart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { LineChart, Line, BarChart, Bar, PieChart as RePieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 const SupportDashboard = () => {
   const navigate = useNavigate();
@@ -16,6 +17,24 @@ const SupportDashboard = () => {
     { id: "TKT003", user: "Amit Patel", subject: "Chit plan details query", status: "open", priority: "low", date: "2024-09-22", branch: "Mumbai Central" },
     { id: "TKT004", user: "Sneha Reddy", subject: "Receipt not downloaded", status: "resolved", priority: "medium", date: "2024-09-19", branch: "Bangalore Hub" },
     { id: "TKT005", user: "Vikram Singh", subject: "Interest calculation doubt", status: "open", priority: "high", date: "2024-09-23", branch: "Delhi NCR" },
+  ];
+
+  const weeklyTicketData = [
+    { day: "Mon", resolved: 8, new: 12 },
+    { day: "Tue", resolved: 10, new: 15 },
+    { day: "Wed", resolved: 12, new: 10 },
+    { day: "Thu", resolved: 15, new: 8 },
+    { day: "Fri", resolved: 14, new: 11 },
+    { day: "Sat", resolved: 10, new: 6 },
+    { day: "Sun", resolved: 5, new: 3 },
+  ];
+
+  const categoryDistribution = [
+    { name: "Payment Issues", value: 35, color: "#ef4444" },
+    { name: "Login Problems", value: 25, color: "#f59e0b" },
+    { name: "Plan Queries", value: 20, color: "#10b981" },
+    { name: "Technical", value: 15, color: "#1e40af" },
+    { name: "Others", value: 5, color: "#8b5cf6" },
   ];
 
   const handleResolve = (ticketId: string) => {
@@ -115,6 +134,65 @@ const SupportDashboard = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Analytics Section */}
+        <div className="grid lg:grid-cols-2 gap-6 mb-8">
+          {/* Weekly Ticket Trend */}
+          <Card className="shadow-medium">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <TrendingUp className="h-5 w-5" />
+                Weekly Ticket Trend
+              </CardTitle>
+              <CardDescription>New vs resolved tickets</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={300}>
+                <LineChart data={weeklyTicketData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="day" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="new" stroke="#ef4444" strokeWidth={2} />
+                  <Line type="monotone" dataKey="resolved" stroke="#10b981" strokeWidth={2} />
+                </LineChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+
+          {/* Category Distribution */}
+          <Card className="shadow-medium">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <PieChart className="h-5 w-5" />
+                Issue Categories
+              </CardTitle>
+              <CardDescription>Tickets by category</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={300}>
+                <RePieChart>
+                  <Pie
+                    data={categoryDistribution}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    label={(entry) => `${entry.name}: ${entry.value}`}
+                    outerRadius={100}
+                    fill="#8884d8"
+                    dataKey="value"
+                  >
+                    {categoryDistribution.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </RePieChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        </div>
 
         {/* Tickets Table */}
         <Card className="shadow-medium">

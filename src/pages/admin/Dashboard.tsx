@@ -2,7 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
-import { LogOut, Users, IndianRupee, TrendingUp, Bell, FileText, UserPlus } from "lucide-react";
+import { LogOut, Users, IndianRupee, TrendingUp, Bell, FileText, UserPlus, BarChart3, PieChart, Activity } from "lucide-react";
+import { LineChart, Line, BarChart, Bar, PieChart as RePieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart } from "recharts";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -27,6 +28,28 @@ const AdminDashboard = () => {
     { id: 1, text: "5 pending payments due this week", type: "warning", time: "2 hours ago" },
     { id: 2, text: "New user registration: Amit Patel", type: "info", time: "5 hours ago" },
     { id: 3, text: "Collection target achieved for June", type: "success", time: "1 day ago" },
+  ];
+
+  const collectionTrendData = [
+    { month: "Jan", collections: 80000, target: 150000 },
+    { month: "Feb", collections: 95000, target: 150000 },
+    { month: "Mar", collections: 110000, target: 150000 },
+    { month: "Apr", collections: 120000, target: 150000 },
+    { month: "May", collections: 115000, target: 150000 },
+    { month: "Jun", collections: 125000, target: 150000 },
+  ];
+
+  const userDistribution = [
+    { name: "Active", value: 45, color: "#10b981" },
+    { name: "Pending", value: 3, color: "#f59e0b" },
+    { name: "Inactive", value: 2, color: "#ef4444" },
+  ];
+
+  const planDistribution = [
+    { plan: "1-Year", users: 20 },
+    { plan: "2-Year", users: 15 },
+    { plan: "3-Year", users: 10 },
+    { plan: "6-Month", users: 5 },
   ];
 
   return (
@@ -195,6 +218,87 @@ const AdminDashboard = () => {
             </Card>
           </div>
         </div>
+
+        {/* Analytics Charts */}
+        <div className="grid lg:grid-cols-2 gap-6 mb-8">
+          {/* Collection Trend */}
+          <Card className="shadow-medium">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <BarChart3 className="h-5 w-5" />
+                Collection Trend
+              </CardTitle>
+              <CardDescription>Monthly collections vs targets</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={300}>
+                <AreaChart data={collectionTrendData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Area type="monotone" dataKey="target" stackId="1" stroke="#f59e0b" fill="#f59e0b" opacity={0.3} />
+                  <Area type="monotone" dataKey="collections" stackId="2" stroke="#10b981" fill="#10b981" />
+                </AreaChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+
+          {/* User Distribution */}
+          <Card className="shadow-medium">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <PieChart className="h-5 w-5" />
+                User Status Distribution
+              </CardTitle>
+              <CardDescription>Active vs inactive members</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={300}>
+                <RePieChart>
+                  <Pie
+                    data={userDistribution}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    label={(entry) => `${entry.name}: ${entry.value}`}
+                    outerRadius={100}
+                    fill="#8884d8"
+                    dataKey="value"
+                  >
+                    {userDistribution.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </RePieChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Plan Distribution */}
+        <Card className="shadow-medium mb-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Activity className="h-5 w-5" />
+              Chit Plan Distribution
+            </CardTitle>
+            <CardDescription>Users by plan type</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ResponsiveContainer width="100%" height={250}>
+              <BarChart data={planDistribution}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="plan" />
+                <YAxis />
+                <Tooltip />
+                <Bar dataKey="users" fill="#1e40af" />
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
 
         {/* Monthly Performance */}
         <Card className="shadow-medium">
