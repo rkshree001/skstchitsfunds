@@ -3,7 +3,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
 import { LogOut, Calculator, Receipt, HelpCircle, TrendingUp, Calendar, IndianRupee, PieChart, BarChart3, Wallet } from "lucide-react";
-import { LineChart, Line, BarChart, Bar, PieChart as RePieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { LineChart, Line, BarChart, Bar, AreaChart, Area, PieChart as RePieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { Progress } from "@/components/ui/progress";
 
 const UserDashboard = () => {
   const navigate = useNavigate();
@@ -41,24 +42,53 @@ const UserDashboard = () => {
     { id: 5, date: "15 Feb 2024", type: "Premium Payment", amount: 10000, status: "completed" },
   ];
 
+  // Realistic monthly payment & interest trends
   const paymentTrendData = [
-    { month: "Jan", amount: 10000 },
-    { month: "Feb", amount: 10000 },
-    { month: "Mar", amount: 10000 },
-    { month: "Apr", amount: 10000 },
-    { month: "May", amount: 10000 },
-    { month: "Jun", amount: 10000 },
+    { month: "Jan", paid: 10000, pending: 0, interest: 417 },
+    { month: "Feb", paid: 10000, pending: 0, interest: 833 },
+    { month: "Mar", paid: 10000, pending: 0, interest: 1250 },
+    { month: "Apr", paid: 10000, pending: 0, interest: 1667 },
+    { month: "May", paid: 10000, pending: 0, interest: 2083 },
+    { month: "Jun", paid: 10000, pending: 0, interest: 2500 },
+    { month: "Jul", paid: 9500, pending: 500, interest: 2896 },
+    { month: "Aug", paid: 10000, pending: 0, interest: 3333 },
   ];
 
+  // Savings breakdown pie chart
   const savingsBreakdown = [
-    { name: "Paid", value: 60000, color: "#10b981" },
-    { name: "Remaining", value: 60000, color: "#f59e0b" },
+    { name: "Principal Paid", value: 79500, color: "#1e40af" },
+    { name: "Interest Earned", value: 3313, color: "#10b981" },
+    { name: "Bonus Credits", value: 1500, color: "#f59e0b" },
+    { name: "Dividend Share", value: 2200, color: "#8b5cf6" },
   ];
 
+  // Chit performance metrics
   const performanceData = [
-    { metric: "On-Time Payments", value: 100 },
-    { metric: "Expected Returns", value: 85 },
-    { metric: "Completion Rate", value: 50 },
+    { label: "On-time Payments", value: 95, color: "bg-success" },
+    { label: "Chit Completion", value: 67, color: "bg-primary" },
+    { label: "Bonus Eligibility", value: 85, color: "bg-warning" },
+  ];
+
+  // Auction participation history
+  const auctionData = [
+    { month: "Jan", participants: 45, winner: "Self", bidAmount: 95000 },
+    { month: "Feb", participants: 43, winner: "Other", bidAmount: 93000 },
+    { month: "Mar", participants: 44, winner: "Other", bidAmount: 94500 },
+    { month: "Apr", participants: 42, winner: "Other", bidAmount: 92000 },
+    { month: "May", participants: 41, winner: "Other", bidAmount: 91500 },
+    { month: "Jun", participants: 40, winner: "Other", bidAmount: 93500 },
+  ];
+
+  // Monthly returns comparison
+  const returnsData = [
+    { month: "Jan", expected: 417, actual: 417 },
+    { month: "Feb", expected: 417, actual: 416 },
+    { month: "Mar", expected: 417, actual: 417 },
+    { month: "Apr", expected: 417, actual: 416 },
+    { month: "May", expected: 417, actual: 417 },
+    { month: "Jun", expected: 417, actual: 413 },
+    { month: "Jul", expected: 417, actual: 396 },
+    { month: "Aug", expected: 417, actual: 420 },
   ];
 
   return (
@@ -170,9 +200,25 @@ const UserDashboard = () => {
                 <Calculator className="h-4 w-4 mr-2" />
                 Calculate Returns
               </Button>
+              <Button onClick={() => navigate("/user/my-chits")} variant="outline" className="w-full justify-start">
+                <Wallet className="h-4 w-4 mr-2" />
+                My Chits
+              </Button>
+              <Button onClick={() => navigate("/user/auctions")} variant="outline" className="w-full justify-start">
+                <TrendingUp className="h-4 w-4 mr-2" />
+                Auctions
+              </Button>
               <Button onClick={() => navigate("/user/transactions")} variant="outline" className="w-full justify-start">
                 <Receipt className="h-4 w-4 mr-2" />
-                View Transactions
+                Transactions
+              </Button>
+              <Button onClick={() => navigate("/user/kyc")} variant="outline" className="w-full justify-start">
+                <HelpCircle className="h-4 w-4 mr-2" />
+                KYC Status
+              </Button>
+              <Button onClick={() => navigate("/user/referrals")} variant="outline" className="w-full justify-start">
+                <Calendar className="h-4 w-4 mr-2" />
+                Referrals
               </Button>
               <Button onClick={() => navigate("/support")} variant="outline" className="w-full justify-start">
                 <HelpCircle className="h-4 w-4 mr-2" />
@@ -226,49 +272,54 @@ const UserDashboard = () => {
           </CardContent>
         </Card>
 
-        {/* Analytics Section */}
+        {/* Charts Section - 4 Types */}
         <div className="grid lg:grid-cols-2 gap-6 mb-8">
-          {/* Payment Trend Chart */}
+          {/* 1. Payment & Interest Trend - Multi-Line Chart */}
           <Card className="shadow-medium">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <BarChart3 className="h-5 w-5" />
-                Payment Trend
+                <TrendingUp className="h-5 w-5" />
+                Payment & Interest Trend
               </CardTitle>
-              <CardDescription>Monthly premium payment history</CardDescription>
+              <CardDescription>Monthly payments and cumulative interest</CardDescription>
             </CardHeader>
             <CardContent>
-              <ResponsiveContainer width="100%" height={250}>
+              <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={paymentTrendData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="month" />
-                  <YAxis />
-                  <Tooltip />
-                  <Line type="monotone" dataKey="amount" stroke="#1e40af" strokeWidth={2} />
+                  <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                  <XAxis dataKey="month" stroke="currentColor" />
+                  <YAxis stroke="currentColor" />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: 'hsl(var(--card))', border: '1px solid hsl(var(--border))' }}
+                  />
+                  <Legend />
+                  <Line type="monotone" dataKey="paid" stroke="#10b981" strokeWidth={2} name="Paid (₹)" />
+                  <Line type="monotone" dataKey="interest" stroke="#1e40af" strokeWidth={2} name="Interest (₹)" />
+                  <Line type="monotone" dataKey="pending" stroke="#ef4444" strokeWidth={2} name="Pending (₹)" />
                 </LineChart>
               </ResponsiveContainer>
             </CardContent>
           </Card>
 
-          {/* Savings Breakdown */}
+          {/* 2. Savings Breakdown - Pie Chart */}
           <Card className="shadow-medium">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <PieChart className="h-5 w-5" />
                 Savings Breakdown
               </CardTitle>
-              <CardDescription>Total chit fund status</CardDescription>
+              <CardDescription>Total: ₹86,513 accumulated</CardDescription>
             </CardHeader>
             <CardContent>
-              <ResponsiveContainer width="100%" height={250}>
+              <ResponsiveContainer width="100%" height={300}>
                 <RePieChart>
                   <Pie
                     data={savingsBreakdown}
                     cx="50%"
                     cy="50%"
                     labelLine={false}
-                    label={(entry: any) => `${entry.name}: ₹${(entry.value / 1000).toFixed(0)}K`}
-                    outerRadius={80}
+                    label={(entry: any) => `₹${entry.value.toLocaleString()}`}
+                    outerRadius={90}
                     fill="#8884d8"
                     dataKey="value"
                   >
@@ -277,7 +328,74 @@ const UserDashboard = () => {
                     ))}
                   </Pie>
                   <Tooltip />
+                  <Legend />
                 </RePieChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+
+          {/* 3. Auction Participation - Bar Chart */}
+          <Card className="shadow-medium">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <BarChart3 className="h-5 w-5" />
+                Auction Participation
+              </CardTitle>
+              <CardDescription>Monthly auction participants & bid amounts</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={auctionData}>
+                  <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                  <XAxis dataKey="month" stroke="currentColor" />
+                  <YAxis stroke="currentColor" />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: 'hsl(var(--card))', border: '1px solid hsl(var(--border))' }}
+                  />
+                  <Legend />
+                  <Bar dataKey="participants" fill="#8b5cf6" name="Participants" />
+                  <Bar dataKey="bidAmount" fill="#f59e0b" name="Winning Bid (₹)" />
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+
+          {/* 4. Returns Comparison - Area Chart */}
+          <Card className="shadow-medium">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <TrendingUp className="h-5 w-5" />
+                Expected vs Actual Returns
+              </CardTitle>
+              <CardDescription>Monthly return comparison</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={300}>
+                <AreaChart data={returnsData}>
+                  <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                  <XAxis dataKey="month" stroke="currentColor" />
+                  <YAxis stroke="currentColor" />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: 'hsl(var(--card))', border: '1px solid hsl(var(--border))' }}
+                  />
+                  <Legend />
+                  <Area 
+                    type="monotone" 
+                    dataKey="expected" 
+                    stroke="#1e40af" 
+                    fill="#1e40af" 
+                    fillOpacity={0.3}
+                    name="Expected (₹)" 
+                  />
+                  <Area 
+                    type="monotone" 
+                    dataKey="actual" 
+                    stroke="#10b981" 
+                    fill="#10b981" 
+                    fillOpacity={0.6}
+                    name="Actual (₹)" 
+                  />
+                </AreaChart>
               </ResponsiveContainer>
             </CardContent>
           </Card>
@@ -287,25 +405,20 @@ const UserDashboard = () => {
         <Card className="shadow-medium mb-8">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Wallet className="h-5 w-5" />
+              <BarChart3 className="h-5 w-5" />
               Performance Metrics
             </CardTitle>
-            <CardDescription>Your chit fund performance indicators</CardDescription>
+            <CardDescription>Your chit participation performance</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {performanceData.map((item, idx) => (
-                <div key={idx}>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium">{item.metric}</span>
-                    <span className="text-sm font-bold">{item.value}%</span>
+              {performanceData.map((metric) => (
+                <div key={metric.label}>
+                  <div className="flex justify-between mb-2">
+                    <span className="text-sm font-medium">{metric.label}</span>
+                    <span className="text-sm font-bold">{metric.value}%</span>
                   </div>
-                  <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-success rounded-full transition-all"
-                      style={{ width: `${item.value}%` }}
-                    ></div>
-                  </div>
+                  <Progress value={metric.value} className={metric.color} />
                 </div>
               ))}
             </div>

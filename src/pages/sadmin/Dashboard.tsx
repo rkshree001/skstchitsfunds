@@ -30,29 +30,41 @@ const SuperAdminDashboard = () => {
     { id: 4, role: "User", count: 500, permissions: "View Only" },
   ];
 
+  // Monthly growth trends across all branches
   const monthlyGrowthData = [
-    { month: "Jan", users: 400, collections: 4000000 },
-    { month: "Feb", users: 420, collections: 4200000 },
-    { month: "Mar", users: 450, collections: 4500000 },
-    { month: "Apr", users: 470, collections: 4700000 },
-    { month: "May", users: 480, collections: 4800000 },
-    { month: "Jun", users: 500, collections: 5000000 },
+    { month: "Jan", users: 450, revenue: 4500000, chits: 78, defaults: 12 },
+    { month: "Feb", users: 478, revenue: 4780000, chits: 82, defaults: 9 },
+    { month: "Mar", users: 510, revenue: 5100000, chits: 88, defaults: 8 },
+    { month: "Apr", users: 495, revenue: 4950000, chits: 85, defaults: 15 },
+    { month: "May", users: 523, revenue: 5230000, chits: 90, defaults: 18 },
+    { month: "Jun", users: 556, revenue: 5560000, chits: 95, defaults: 10 },
   ];
 
+  // Branch performance comparison
   const branchPerformance = [
-    { branch: "Mumbai", collections: 1500000, users: 150 },
-    { branch: "Pune", collections: 1200000, users: 120 },
-    { branch: "Bangalore", collections: 1400000, users: 130 },
-    { branch: "Delhi", collections: 800000, users: 80 },
-    { branch: "Chennai", collections: 100000, users: 20 },
+    { branch: "Mumbai", collection: 95.2, users: 150, revenue: 1800000, efficiency: 94 },
+    { branch: "Pune", collection: 88.5, users: 120, revenue: 1400000, efficiency: 87 },
+    { branch: "Bangalore", collection: 92.1, users: 140, revenue: 1700000, efficiency: 91 },
+    { branch: "Delhi", collection: 85.3, users: 100, revenue: 1200000, efficiency: 83 },
+    { branch: "Chennai", collection: 90.8, users: 90, revenue: 1100000, efficiency: 89 },
   ];
 
+  // System health radar metrics
   const systemHealth = [
-    { metric: "Uptime", value: 99.9 },
-    { metric: "Performance", value: 95 },
-    { metric: "Security", value: 98 },
-    { metric: "Reliability", value: 97 },
-    { metric: "Efficiency", value: 89 },
+    { metric: "Uptime", value: 99.9, fullMark: 100 },
+    { metric: "Response Time", value: 95.3, fullMark: 100 },
+    { metric: "Data Accuracy", value: 98.7, fullMark: 100 },
+    { metric: "Security Score", value: 97.2, fullMark: 100 },
+    { metric: "User Satisfaction", value: 92.5, fullMark: 100 },
+    { metric: "Collection Rate", value: 91.8, fullMark: 100 },
+  ];
+
+  // Regional growth comparison
+  const regionalGrowth = [
+    { region: "West", Q1: 4200000, Q2: 4850000, Q3: 5250000 },
+    { region: "South", Q1: 3800000, Q2: 4300000, Q3: 4700000 },
+    { region: "North", Q1: 3500000, Q2: 3900000, Q3: 4250000 },
+    { region: "East", Q1: 2800000, Q2: 3100000, Q3: 3400000 },
   ];
 
   return (
@@ -185,77 +197,116 @@ const SuperAdminDashboard = () => {
           </CardContent>
         </Card>
 
-        {/* Analytics Section */}
+        {/* Analytics Section - 4 Chart Types */}
         <div className="grid lg:grid-cols-2 gap-6 mb-8">
-          {/* Growth Trend */}
+          {/* 1. Monthly Growth - Multi-Metric Area Chart */}
           <Card className="shadow-medium">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <TrendingUp className="h-5 w-5" />
-                System Growth Trend
+                Multi-Metric Growth Trend
               </CardTitle>
-              <CardDescription>Users and collections over time</CardDescription>
+              <CardDescription>Users, revenue, chits & defaults tracking</CardDescription>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
                 <AreaChart data={monthlyGrowthData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="month" />
-                  <YAxis yAxisId="left" />
-                  <YAxis yAxisId="right" orientation="right" />
-                  <Tooltip />
+                  <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                  <XAxis dataKey="month" stroke="currentColor" />
+                  <YAxis yAxisId="left" stroke="currentColor" />
+                  <YAxis yAxisId="right" orientation="right" stroke="currentColor" />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: 'hsl(var(--card))', border: '1px solid hsl(var(--border))' }}
+                  />
                   <Legend />
-                  <Area yAxisId="left" type="monotone" dataKey="users" stackId="1" stroke="#1e40af" fill="#1e40af" />
-                  <Area yAxisId="right" type="monotone" dataKey="collections" stackId="2" stroke="#10b981" fill="#10b981" opacity={0.6} />
+                  <Area yAxisId="left" type="monotone" dataKey="users" stroke="#1e40af" fill="#1e40af" fillOpacity={0.4} name="Users" />
+                  <Area yAxisId="right" type="monotone" dataKey="revenue" stroke="#10b981" fill="#10b981" fillOpacity={0.3} name="Revenue (₹)" />
+                  <Area yAxisId="left" type="monotone" dataKey="chits" stroke="#8b5cf6" fill="#8b5cf6" fillOpacity={0.2} name="Active Chits" />
+                  <Area yAxisId="left" type="monotone" dataKey="defaults" stroke="#ef4444" fill="#ef4444" fillOpacity={0.3} name="Defaults" />
                 </AreaChart>
               </ResponsiveContainer>
             </CardContent>
           </Card>
 
-          {/* Branch Performance */}
+          {/* 2. Branch Performance - Grouped Bar Chart */}
           <Card className="shadow-medium">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <BarChart3 className="h-5 w-5" />
-                Branch Performance
+                Branch Performance Matrix
               </CardTitle>
-              <CardDescription>Collections by branch</CardDescription>
+              <CardDescription>Multi-metric comparison across branches</CardDescription>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={branchPerformance}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="branch" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar dataKey="collections" fill="#1e40af" />
+                  <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                  <XAxis dataKey="branch" stroke="currentColor" />
+                  <YAxis stroke="currentColor" />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: 'hsl(var(--card))', border: '1px solid hsl(var(--border))' }}
+                  />
+                  <Legend />
+                  <Bar dataKey="collection" fill="#10b981" name="Collection %" />
+                  <Bar dataKey="efficiency" fill="#1e40af" name="Efficiency %" />
+                  <Bar dataKey="users" fill="#f59e0b" name="Users" />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>
           </Card>
-        </div>
 
-        {/* System Health Radar */}
-        <Card className="shadow-medium mb-8">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Activity className="h-5 w-5" />
-              System Health Overview
-            </CardTitle>
-            <CardDescription>Comprehensive system performance metrics</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={350}>
-              <RadarChart data={systemHealth}>
-                <PolarGrid />
-                <PolarAngleAxis dataKey="metric" />
-                <PolarRadiusAxis angle={90} domain={[0, 100]} />
-                <Radar name="Performance" dataKey="value" stroke="#1e40af" fill="#1e40af" fillOpacity={0.6} />
-                <Tooltip />
-              </RadarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
+          {/* 3. Regional Growth - Stacked Bar */}
+          <Card className="shadow-medium">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <TrendingUp className="h-5 w-5" />
+                Regional Revenue Growth
+              </CardTitle>
+              <CardDescription>Quarterly revenue by region</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={regionalGrowth}>
+                  <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                  <XAxis dataKey="region" stroke="currentColor" />
+                  <YAxis stroke="currentColor" />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: 'hsl(var(--card))', border: '1px solid hsl(var(--border))' }}
+                    formatter={(value: any) => `₹${value.toLocaleString()}`}
+                  />
+                  <Legend />
+                  <Bar dataKey="Q1" stackId="a" fill="#1e40af" name="Q1" />
+                  <Bar dataKey="Q2" stackId="a" fill="#10b981" name="Q2" />
+                  <Bar dataKey="Q3" stackId="a" fill="#8b5cf6" name="Q3" />
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+
+          {/* 4. System Health Radar */}
+          <Card className="shadow-medium">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Activity className="h-5 w-5" />
+                System Health Metrics
+              </CardTitle>
+              <CardDescription>Overall system performance indicators</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={300}>
+                <RadarChart data={systemHealth}>
+                  <PolarGrid stroke="hsl(var(--border))" />
+                  <PolarAngleAxis dataKey="metric" stroke="currentColor" />
+                  <PolarRadiusAxis angle={90} domain={[0, 100]} stroke="currentColor" />
+                  <Radar name="Performance" dataKey="value" stroke="#1e40af" fill="#1e40af" fillOpacity={0.5} />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: 'hsl(var(--card))', border: '1px solid hsl(var(--border))' }}
+                  />
+                </RadarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        </div>
 
         {/* Role Management & System Info */}
         <div className="grid lg:grid-cols-2 gap-6">

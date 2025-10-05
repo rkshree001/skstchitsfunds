@@ -30,26 +30,39 @@ const AdminDashboard = () => {
     { id: 3, text: "Collection target achieved for June", type: "success", time: "1 day ago" },
   ];
 
+  // Realistic collection trends with defaults
   const collectionTrendData = [
-    { month: "Jan", collections: 80000, target: 150000 },
-    { month: "Feb", collections: 95000, target: 150000 },
-    { month: "Mar", collections: 110000, target: 150000 },
-    { month: "Apr", collections: 120000, target: 150000 },
-    { month: "May", collections: 115000, target: 150000 },
-    { month: "Jun", collections: 125000, target: 150000 },
+    { month: "Jan", collected: 135000, target: 150000, defaulted: 15000 },
+    { month: "Feb", collected: 142000, target: 150000, defaulted: 8000 },
+    { month: "Mar", collected: 147000, target: 150000, defaulted: 3000 },
+    { month: "Apr", collected: 138000, target: 150000, defaulted: 12000 },
+    { month: "May", collected: 140000, target: 150000, defaulted: 10000 },
+    { month: "Jun", collected: 145000, target: 150000, defaulted: 5000 },
+    { month: "Jul", collected: 148000, target: 150000, defaulted: 2000 },
+    { month: "Aug", collected: 125000, target: 150000, defaulted: 25000 },
   ];
 
+  // User status distribution
   const userDistribution = [
-    { name: "Active", value: 45, color: "#10b981" },
-    { name: "Pending", value: 3, color: "#f59e0b" },
-    { name: "Inactive", value: 2, color: "#ef4444" },
+    { name: "Active Paying", value: 42, color: "#10b981" },
+    { name: "Pending KYC", value: 5, color: "#f59e0b" },
+    { name: "Defaulted", value: 3, color: "#ef4444" },
   ];
 
+  // Chit plan popularity with revenue
   const planDistribution = [
-    { plan: "1-Year", users: 20 },
-    { plan: "2-Year", users: 15 },
-    { plan: "3-Year", users: 10 },
-    { plan: "6-Month", users: 5 },
+    { plan: "6-Month", users: 15, revenue: 450000 },
+    { plan: "1-Year", users: 25, revenue: 1250000 },
+    { plan: "2-Year", users: 8, revenue: 800000 },
+    { plan: "3-Year", users: 2, revenue: 300000 },
+  ];
+
+  // Weekly payment performance
+  const weeklyPerformance = [
+    { week: "Week 1", onTime: 38, late: 7, missed: 5 },
+    { week: "Week 2", onTime: 42, late: 5, missed: 3 },
+    { week: "Week 3", onTime: 40, late: 6, missed: 4 },
+    { week: "Week 4", onTime: 45, late: 3, missed: 2 },
   ];
 
   return (
@@ -219,40 +232,44 @@ const AdminDashboard = () => {
           </div>
         </div>
 
-        {/* Analytics Charts */}
+        {/* Analytics Section - 4 Chart Types */}
         <div className="grid lg:grid-cols-2 gap-6 mb-8">
-          {/* Collection Trend */}
+          {/* 1. Collection Trend with Defaults - Area Chart */}
           <Card className="shadow-medium">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <BarChart3 className="h-5 w-5" />
-                Collection Trend
+                <TrendingUp className="h-5 w-5" />
+                Collection Trend & Defaults
               </CardTitle>
-              <CardDescription>Monthly collections vs targets</CardDescription>
+              <CardDescription>Monthly collection vs target with defaults</CardDescription>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
                 <AreaChart data={collectionTrendData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="month" />
-                  <YAxis />
-                  <Tooltip />
+                  <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                  <XAxis dataKey="month" stroke="currentColor" />
+                  <YAxis stroke="currentColor" />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: 'hsl(var(--card))', border: '1px solid hsl(var(--border))' }}
+                    formatter={(value: any) => `₹${value.toLocaleString()}`}
+                  />
                   <Legend />
-                  <Area type="monotone" dataKey="target" stackId="1" stroke="#f59e0b" fill="#f59e0b" opacity={0.3} />
-                  <Area type="monotone" dataKey="collections" stackId="2" stroke="#10b981" fill="#10b981" />
+                  <Area type="monotone" dataKey="target" stroke="#1e40af" fill="#1e40af" fillOpacity={0.2} name="Target" />
+                  <Area type="monotone" dataKey="collected" stroke="#10b981" fill="#10b981" fillOpacity={0.5} name="Collected" />
+                  <Area type="monotone" dataKey="defaulted" stroke="#ef4444" fill="#ef4444" fillOpacity={0.3} name="Defaulted" />
                 </AreaChart>
               </ResponsiveContainer>
             </CardContent>
           </Card>
 
-          {/* User Distribution */}
+          {/* 2. User Distribution - Pie Chart */}
           <Card className="shadow-medium">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <PieChart className="h-5 w-5" />
-                User Status Distribution
+                <Users className="h-5 w-5" />
+                User Distribution
               </CardTitle>
-              <CardDescription>Active vs inactive members</CardDescription>
+              <CardDescription>Total: 50 users across all statuses</CardDescription>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
@@ -262,8 +279,8 @@ const AdminDashboard = () => {
                     cx="50%"
                     cy="50%"
                     labelLine={false}
-                    label={(entry) => `${entry.name}: ${entry.value}`}
-                    outerRadius={100}
+                    label={(entry: any) => `${entry.value}`}
+                    outerRadius={90}
                     fill="#8884d8"
                     dataKey="value"
                   >
@@ -272,33 +289,65 @@ const AdminDashboard = () => {
                     ))}
                   </Pie>
                   <Tooltip />
+                  <Legend />
                 </RePieChart>
               </ResponsiveContainer>
             </CardContent>
           </Card>
-        </div>
 
-        {/* Plan Distribution */}
-        <Card className="shadow-medium mb-8">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Activity className="h-5 w-5" />
-              Chit Plan Distribution
-            </CardTitle>
-            <CardDescription>Users by plan type</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={250}>
-              <BarChart data={planDistribution}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="plan" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="users" fill="#1e40af" />
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
+          {/* 3. Plan Distribution - Bar Chart with Revenue */}
+          <Card className="shadow-medium">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <BarChart3 className="h-5 w-5" />
+                Chit Plan Distribution
+              </CardTitle>
+              <CardDescription>Users & revenue by plan type</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={planDistribution}>
+                  <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                  <XAxis dataKey="plan" stroke="currentColor" />
+                  <YAxis stroke="currentColor" />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: 'hsl(var(--card))', border: '1px solid hsl(var(--border))' }}
+                  />
+                  <Legend />
+                  <Bar dataKey="users" fill="#1e40af" name="Users" />
+                  <Bar dataKey="revenue" fill="#10b981" name="Revenue (₹)" />
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+
+          {/* 4. Weekly Payment Performance - Stacked Bar */}
+          <Card className="shadow-medium">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <TrendingUp className="h-5 w-5" />
+                Weekly Payment Performance
+              </CardTitle>
+              <CardDescription>Payment timeliness this month</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={weeklyPerformance}>
+                  <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                  <XAxis dataKey="week" stroke="currentColor" />
+                  <YAxis stroke="currentColor" />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: 'hsl(var(--card))', border: '1px solid hsl(var(--border))' }}
+                  />
+                  <Legend />
+                  <Bar dataKey="onTime" stackId="a" fill="#10b981" name="On Time" />
+                  <Bar dataKey="late" stackId="a" fill="#f59e0b" name="Late" />
+                  <Bar dataKey="missed" stackId="a" fill="#ef4444" name="Missed" />
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        </div>
 
         {/* Monthly Performance */}
         <Card className="shadow-medium">

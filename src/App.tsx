@@ -19,6 +19,10 @@ import AddBranch from "./pages/sadmin/AddBranch";
 import UserManagement from "./pages/admin/UserManagement";
 import AddUser from "./pages/admin/AddUser";
 import UserTransactions from "./pages/user/Transactions";
+import MyChits from "./pages/user/MyChits";
+import Auctions from "./pages/user/Auctions";
+import KYC from "./pages/user/KYC";
+import Referrals from "./pages/user/Referrals";
 import SupportLogin from "./pages/support/Login";
 import SupportDashboard from "./pages/support/Dashboard";
 import NotFound from "./pages/NotFound";
@@ -41,6 +45,10 @@ const App = () => (
           <Route path="/terms" element={<Terms />} />
           <Route path="/user/dashboard" element={<UserDashboard />} />
           <Route path="/user/transactions" element={<UserTransactions />} />
+          <Route path="/user/my-chits" element={<MyChits />} />
+          <Route path="/user/auctions" element={<Auctions />} />
+          <Route path="/user/kyc" element={<KYC />} />
+          <Route path="/user/referrals" element={<Referrals />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/payment-update" element={<PaymentUpdate />} />
           <Route path="/admin/user-management" element={<UserManagement />} />
