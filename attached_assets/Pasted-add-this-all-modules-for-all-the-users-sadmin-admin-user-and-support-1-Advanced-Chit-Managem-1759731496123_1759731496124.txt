@@ -1,0 +1,162 @@
+add this all modules for all the users, sadmin,admin,user and support
+
+💼 1. Advanced Chit Management Modules
+🧾 Multi-Chit Enrollment
+
+Allow users to subscribe to multiple chit groups simultaneously.
+
+Show combined dashboard of all chit plans.
+
+Status: Active / Completed / Defaulted.
+
+💰 Chit Auction Management
+
+Schedule monthly auctions automatically.
+
+Bidding system (static demo now; real-time later).
+
+Show “Winner of the Month” and updated dividend share.
+
+📆 Chit Lifecycle Tracking
+
+Phases: Enrollment → Collection → Auction → Payout → Close.
+
+Visual progress bar per chit group.
+
+🧮 Auto Payout Calculator
+
+Estimate returns dynamically based on bid amount and interest.
+
+Useful for both users and admin reports.
+
+🏦 2. Finance & Payment Modules
+💳 Payment Gateway Integration (later dynamic)
+
+Razorpay/Stripe integration placeholder for online payment.
+
+Mock “Paid Successfully” popup for now.
+
+📊 Ledger & Accounting Module
+
+Static pages showing user-wise and branch-wise ledgers.
+
+Debit/Credit view with monthly reconciliation demo.
+
+📈 Investment Analytics
+
+Display graphs for ROI, interest, and payout summaries.
+
+Predict next auction bid (AI recommendation placeholder).
+
+💵 Refund & Penalty Management
+
+Late fee calculation page.
+
+Static refund process tracking page (requested → approved → paid).
+
+🧍‍♂️ 3. User Management Enhancements
+🧾 KYC & Verification Module
+
+Static form for PAN/Aadhaar upload (mock).
+
+“Pending Approval” and “Approved” badges for demo.
+
+🧠 AI Support Assistant
+
+AI chatbot (placeholder) for chit queries and onboarding.
+
+Example: “How does a 1-year chit work?” → static answer.
+
+🪙 Referral & Bonus Module
+
+Invite via email/SMS.
+
+Static reward dashboard (referral count, mock credits).
+
+💬 Feedback & Reviews
+
+Static feedback form + average rating display.
+
+🧑‍💼 4. Admin & Control Panel Modules
+🧾 Field Collection Tracking
+
+Mock map showing field staff routes and collection visits.
+
+“Collected” / “Pending” status markers.
+
+🏢 Branch Performance Report
+
+Compare branches using static bar charts.
+
+KPIs: Users, Collection %, Defaults.
+
+🕒 Activity Log / Audit Trail
+
+Track every action in UI (mock timeline list).
+
+🔐 Role-Based Access Management
+
+Admin can view user roles (view/edit permissions — disabled in static).
+
+🧠 5. Super Admin (Sadmin) Modules
+🌐 Multi-Branch Overview
+
+Global heatmap of branches (dummy data for static view).
+
+Drill-down into branch → Admin → User → Chit.
+
+🧾 Financial Compliance Reports
+
+Mock regulatory report export (PDF/CSV download button).
+
+📊 AI Insights Dashboard
+
+Predictive analysis (placeholder): “Expected next-month collection: ₹1.2 Cr.”
+
+AI-detected anomalies (e.g., unusual defaults).
+
+🧰 Settings Management
+
+Manage system parameters: Interest %, Penalty Rate %, Auction Day, etc.
+
+📞 6. Support, Communication & Marketing
+💬 Ticketing System
+
+Raise & track support tickets (static statuses: Open / In Progress / Closed).
+
+📨 Bulk Notifications
+
+Compose & send mock SMS/email alerts to all users.
+
+🧭 Onboarding Assistant
+
+Step-by-step static wizard for new users (How to join, pay, participate).
+
+🌟 Marketing / Promotions Page
+
+Display ongoing offers or new chit schemes.
+
+🧩 7. Future-Ready AI & Automation Modules
+🤖 Predictive Collection Analyzer
+
+Forecast expected defaulters (AI placeholder for now).
+
+🧾 Smart Document Analyzer
+
+Upload a chit document → auto-read and extract details (mock demo).
+
+📈 AI Financial Advisor
+
+Suggests the best chit plan based on user goals (static Q&A demo).
+
+🧱 8. Extra Utility Modules
+
+Dark/Light Theme Toggle 🌗
+
+Download Center: PDFs, receipts, reports.
+
+Notifications Bell + History Page 🔔
+
+Help Center / FAQ Explorer 📘
+
+Multi-language Support (English, Hindi, Tamil, Telugu) 🌐

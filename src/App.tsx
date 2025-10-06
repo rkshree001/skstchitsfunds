@@ -50,6 +50,12 @@ import Tickets from "./pages/support/Tickets";
 import BulkNotifications from "./pages/support/BulkNotifications";
 import Onboarding from "./pages/support/Onboarding";
 import Promotions from "./pages/support/Promotions";
+import SadminDownloads from "./pages/sadmin/Downloads";
+import SadminNotifications from "./pages/sadmin/Notifications";
+import SadminHelp from "./pages/sadmin/Help";
+import SupportDownloads from "./pages/support/Downloads";
+import SupportNotifications from "./pages/support/Notifications";
+import SupportHelp from "./pages/support/Help";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -102,12 +108,18 @@ const App = () => (
           <Route path="/sadmin/compliance" element={<ComplianceReports />} />
           <Route path="/sadmin/ai-insights" element={<AIInsights />} />
           <Route path="/sadmin/settings" element={<Settings />} />
+          <Route path="/sadmin/downloads" element={<SadminDownloads />} />
+          <Route path="/sadmin/notifications" element={<SadminNotifications />} />
+          <Route path="/sadmin/help" element={<SadminHelp />} />
           <Route path="/support/login" element={<SupportLogin />} />
           <Route path="/support/dashboard" element={<SupportDashboard />} />
           <Route path="/support/tickets" element={<Tickets />} />
           <Route path="/support/bulk-notifications" element={<BulkNotifications />} />
           <Route path="/support/onboarding" element={<Onboarding />} />
           <Route path="/support/promotions" element={<Promotions />} />
+          <Route path="/support/downloads" element={<SupportDownloads />} />
+          <Route path="/support/notifications" element={<SupportNotifications />} />
+          <Route path="/support/help" element={<SupportHelp />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
