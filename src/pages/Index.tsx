@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { Shield, Users, TrendingUp, Calculator, Clock, Award } from "lucide-react";
+import { Shield, Users, TrendingUp, Calculator, Clock, Award, Smartphone, BarChart3, Bot, FileText, Bell, Download, HelpCircle, Settings, Globe, Moon, Sun } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -18,8 +19,9 @@ const Index = () => {
           <nav className="hidden md:flex items-center gap-6">
             <a href="#about" className="text-muted-foreground hover:text-foreground transition-colors">About</a>
             <a href="#how-it-works" className="text-muted-foreground hover:text-foreground transition-colors">How It Works</a>
-            <a href="#benefits" className="text-muted-foreground hover:text-foreground transition-colors">Benefits</a>
-            <Button onClick={() => navigate("/login")} variant="default">Login</Button>
+            <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a>
+            <ThemeToggle />
+            <Button onClick={() => navigate("/login")} variant="default" data-testid="button-header-login">Login</Button>
           </nav>
         </div>
       </header>
@@ -122,8 +124,145 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Advanced Features Section */}
+      <section id="features" className="py-16 md:py-24 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Advanced Features</h2>
+            <p className="text-muted-foreground text-lg">Powerful tools and modules for all user roles</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <Card className="shadow-soft hover:shadow-medium transition-shadow" data-testid="card-feature-multi-chit">
+              <CardHeader>
+                <Users className="h-10 w-10 text-primary mb-2" />
+                <CardTitle className="text-lg">Multi-Chit Enrollment</CardTitle>
+                <CardDescription>
+                  Subscribe to multiple chit groups simultaneously with a unified dashboard
+                </CardDescription>
+              </CardHeader>
+            </Card>
+
+            <Card className="shadow-soft hover:shadow-medium transition-shadow" data-testid="card-feature-auction">
+              <CardHeader>
+                <TrendingUp className="h-10 w-10 text-primary mb-2" />
+                <CardTitle className="text-lg">Smart Auction System</CardTitle>
+                <CardDescription>
+                  Automated monthly auctions with real-time bidding and winner tracking
+                </CardDescription>
+              </CardHeader>
+            </Card>
+
+            <Card className="shadow-soft hover:shadow-medium transition-shadow" data-testid="card-feature-analytics">
+              <CardHeader>
+                <BarChart3 className="h-10 w-10 text-primary mb-2" />
+                <CardTitle className="text-lg">Investment Analytics</CardTitle>
+                <CardDescription>
+                  Comprehensive ROI tracking, graphs, and AI-powered predictions
+                </CardDescription>
+              </CardHeader>
+            </Card>
+
+            <Card className="shadow-soft hover:shadow-medium transition-shadow" data-testid="card-feature-ai">
+              <CardHeader>
+                <Bot className="h-10 w-10 text-primary mb-2" />
+                <CardTitle className="text-lg">AI Assistant</CardTitle>
+                <CardDescription>
+                  24/7 AI chatbot for queries, onboarding help, and financial advice
+                </CardDescription>
+              </CardHeader>
+            </Card>
+
+            <Card className="shadow-soft hover:shadow-medium transition-shadow" data-testid="card-feature-payments">
+              <CardHeader>
+                <Smartphone className="h-10 w-10 text-primary mb-2" />
+                <CardTitle className="text-lg">Payment Gateway</CardTitle>
+                <CardDescription>
+                  Secure online payments via Razorpay/Stripe with instant confirmation
+                </CardDescription>
+              </CardHeader>
+            </Card>
+
+            <Card className="shadow-soft hover:shadow-medium transition-shadow" data-testid="card-feature-ledger">
+              <CardHeader>
+                <FileText className="h-10 w-10 text-primary mb-2" />
+                <CardTitle className="text-lg">Digital Ledger</CardTitle>
+                <CardDescription>
+                  Complete transaction history with debit/credit tracking and reconciliation
+                </CardDescription>
+              </CardHeader>
+            </Card>
+
+            <Card className="shadow-soft hover:shadow-medium transition-shadow" data-testid="card-feature-notifications">
+              <CardHeader>
+                <Bell className="h-10 w-10 text-primary mb-2" />
+                <CardTitle className="text-lg">Smart Notifications</CardTitle>
+                <CardDescription>
+                  Real-time alerts for payments, auctions, and important updates
+                </CardDescription>
+              </CardHeader>
+            </Card>
+
+            <Card className="shadow-soft hover:shadow-medium transition-shadow" data-testid="card-feature-downloads">
+              <CardHeader>
+                <Download className="h-10 w-10 text-primary mb-2" />
+                <CardTitle className="text-lg">Download Center</CardTitle>
+                <CardDescription>
+                  Access receipts, statements, and reports anytime in PDF/Excel
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          </div>
+
+          <div className="text-center">
+            <h3 className="text-2xl font-bold mb-6">Role-Based Features</h3>
+            <div className="grid md:grid-cols-4 gap-4 max-w-5xl mx-auto">
+              <Card className="bg-gradient-to-br from-blue-500 to-blue-600 text-white" data-testid="card-role-user">
+                <CardHeader>
+                  <Users className="h-8 w-8 mb-2 mx-auto" />
+                  <CardTitle className="text-center">User Portal</CardTitle>
+                  <CardDescription className="text-white/90 text-center">
+                    Chit enrollment, auctions, payments, KYC, referrals, analytics
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card className="bg-gradient-to-br from-green-500 to-green-600 text-white" data-testid="card-role-admin">
+                <CardHeader>
+                  <Shield className="h-8 w-8 mb-2 mx-auto" />
+                  <CardTitle className="text-center">Admin Panel</CardTitle>
+                  <CardDescription className="text-white/90 text-center">
+                    User management, field tracking, branch performance, activity logs
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card className="bg-gradient-to-br from-purple-500 to-purple-600 text-white" data-testid="card-role-sadmin">
+                <CardHeader>
+                  <Settings className="h-8 w-8 mb-2 mx-auto" />
+                  <CardTitle className="text-center">Super Admin</CardTitle>
+                  <CardDescription className="text-white/90 text-center">
+                    Multi-branch overview, AI insights, compliance, system settings
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card className="bg-gradient-to-br from-orange-500 to-orange-600 text-white" data-testid="card-role-support">
+                <CardHeader>
+                  <HelpCircle className="h-8 w-8 mb-2 mx-auto" />
+                  <CardTitle className="text-center">Support Team</CardTitle>
+                  <CardDescription className="text-white/90 text-center">
+                    Ticketing, bulk notifications, onboarding, promotions
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* How It Works */}
-      <section id="how-it-works" className="py-16 md:py-24 bg-muted/30">
+      <section id="how-it-works" className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">How Chit Funds Work</h2>
