@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useNavigate } from "react-router-dom";
-import { Shield, Users, TrendingUp, Calculator, Clock, Award, Smartphone, BarChart3, Bot, FileText, Bell, Download, HelpCircle, Settings, Globe, Moon, Sun } from "lucide-react";
+import { Shield, Users, TrendingUp, Calculator, Clock, Award, Smartphone, BarChart3, Bot, FileText, Bell, Download, HelpCircle, Settings, Globe, CheckCircle, Layers, DollarSign, UserCheck, MapPin, Activity, LineChart, Zap, MessageSquare, QrCode, Database, Lock, Coins, Receipt, Calendar, GitBranch, Briefcase } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageSelector } from "@/components/LanguageSelector";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -16,10 +19,11 @@ const Index = () => {
             <Shield className="h-8 w-8 text-primary" />
             <span className="text-2xl font-bold">SKST Chit Funds</span>
           </div>
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-4">
             <a href="#about" className="text-muted-foreground hover:text-foreground transition-colors">About</a>
-            <a href="#how-it-works" className="text-muted-foreground hover:text-foreground transition-colors">How It Works</a>
+            <a href="#modules" className="text-muted-foreground hover:text-foreground transition-colors">Modules</a>
             <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a>
+            <LanguageSelector />
             <ThemeToggle />
             <Button onClick={() => navigate("/login")} variant="default" data-testid="button-header-login">Login</Button>
           </nav>
@@ -121,6 +125,198 @@ const Index = () => {
               </CardHeader>
             </Card>
           </div>
+        </div>
+      </section>
+
+      {/* Comprehensive Modules Showcase */}
+      <section id="modules" className="py-16 md:py-24 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <Badge className="mb-4" variant="secondary">Complete Feature Set - 86 Modules</Badge>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">All Modules & Features</h2>
+            <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+              Explore our comprehensive suite of 86 features across all roles: User (41 modules including AI & Integrations), Admin (16), Super Admin (17), Support (12)
+            </p>
+          </div>
+
+          <Tabs defaultValue="user" className="w-full">
+            <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-4 mb-8">
+              <TabsTrigger value="user" data-testid="tab-user-modules">User Modules</TabsTrigger>
+              <TabsTrigger value="admin" data-testid="tab-admin-modules">Admin Panel</TabsTrigger>
+              <TabsTrigger value="sadmin" data-testid="tab-sadmin-modules">Super Admin</TabsTrigger>
+              <TabsTrigger value="support" data-testid="tab-support-modules">Support</TabsTrigger>
+            </TabsList>
+
+            {/* User Modules */}
+            <TabsContent value="user" className="space-y-8">
+              <div>
+                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                  <Layers className="h-6 w-6 text-blue-600" />
+                  Advanced Chit Management
+                </h3>
+                <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-3">
+                  <Card data-testid="module-multi-chit"><CardHeader className="p-4"><CheckCircle className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Multi-Chit Enrollment</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><TrendingUp className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Auction Management</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Activity className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Chit Lifecycle Tracking</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Calculator className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Auto Payout Calculator</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Clock className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Auto-Chit Renewal</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><FileText className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Dynamic Plan Templates</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><BarChart3 className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Real-Time Chit Tracking</CardTitle></CardHeader></Card>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                  <DollarSign className="h-6 w-6 text-green-600" />
+                  Finance & Payments
+                </h3>
+                <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-3">
+                  <Card><CardHeader className="p-4"><Smartphone className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Payment Gateway</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><FileText className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Digital Ledger</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><BarChart3 className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Investment Analytics</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Receipt className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Refund Management</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><QrCode className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">QR Payment Integration</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Coins className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Digital Passbook</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><DollarSign className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Penalty Calculator</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><LineChart className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">ROI Prediction</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><TrendingUp className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Profit/Loss Simulation</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Activity className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Chit Health Score</CardTitle></CardHeader></Card>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                  <UserCheck className="h-6 w-6 text-purple-600" />
+                  User Engagement & Experience
+                </h3>
+                <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-3">
+                  <Card><CardHeader className="p-4"><Lock className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">KYC Verification</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Bot className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">AI Support Assistant</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Users className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Referral Program</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><MessageSquare className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Feedback & Reviews</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Bell className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Smart Notifications</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Download className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Download Center</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><HelpCircle className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Help Center / FAQ</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Zap className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Reward & Loyalty Points</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Award className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Leaderboard</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Calendar className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Onboarding Wizard</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Globe className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Multi-language Support</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Smartphone className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Progressive Web App</CardTitle></CardHeader></Card>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                  <Bot className="h-6 w-6 text-cyan-600" />
+                  Future-Ready AI & Automation
+                </h3>
+                <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-3">
+                  <Card><CardHeader className="p-4"><Bot className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Predictive Defaulter Analyzer</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><FileText className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Smart Document Analyzer</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Bot className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">AI Financial Advisor</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><MessageSquare className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Voice Assistant</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Database className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Blockchain Ledger</CardTitle></CardHeader></Card>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                  <Settings className="h-6 w-6 text-gray-600" />
+                  Extra Utilities & Integration
+                </h3>
+                <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-3">
+                  <Card><CardHeader className="p-4"><Database className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Tally/Zoho Sync</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><FileText className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">eSign Integration</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Smartphone className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">WhatsApp Business API</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Bell className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Push Notifications</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Calendar className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Google Calendar Sync</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Globe className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">SEO & Marketing Pages</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><FileText className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">API Gateway</CardTitle></CardHeader></Card>
+                </div>
+              </div>
+            </TabsContent>
+
+            {/* Admin Modules */}
+            <TabsContent value="admin" className="space-y-8">
+              <div>
+                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                  <Briefcase className="h-6 w-6 text-green-600" />
+                  Control Panel & Management
+                </h3>
+                <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-3">
+                  <Card><CardHeader className="p-4"><Users className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">User Management</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><DollarSign className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Payment Updates</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><MapPin className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Field Agent Tracking</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><BarChart3 className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Branch Performance</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Activity className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Activity Log / Audit</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Shield className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Role-Based Access</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Coins className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Commission Tracker</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><FileText className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Custom Report Builder</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Calendar className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Task & Meeting Scheduler</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Receipt className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Payment Aging Report</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Settings className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Manual Adjustment Console</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><DollarSign className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Expense Tracker</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><MapPin className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">GPS Collection Map</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Bell className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Notifications Center</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Download className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Download Center</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><HelpCircle className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Help Center / Guides</CardTitle></CardHeader></Card>
+                </div>
+              </div>
+            </TabsContent>
+
+            {/* Super Admin Modules */}
+            <TabsContent value="sadmin" className="space-y-8">
+              <div>
+                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                  <Settings className="h-6 w-6 text-purple-600" />
+                  Enterprise & System Controls
+                </h3>
+                <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-3">
+                  <Card><CardHeader className="p-4"><GitBranch className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Multi-Branch Network</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><FileText className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Compliance Reports</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Bot className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">AI Insights & Predictions</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Settings className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">System Settings Hub</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Database className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Consolidated Funds</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Activity className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">System Audit Trails</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><LineChart className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Revenue Forecast</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Shield className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Fraud Detection AI</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><BarChart3 className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Branch Comparison</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><MapPin className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Global Heatmap</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Users className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Hierarchical Drill-Down</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><FileText className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Regulatory Export</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Database className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Backup & Restore</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Bot className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Anomaly Detection</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Bell className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Alert Notifications</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Download className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Downloads & Reports</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><HelpCircle className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Admin Help Center</CardTitle></CardHeader></Card>
+                </div>
+              </div>
+            </TabsContent>
+
+            {/* Support Modules */}
+            <TabsContent value="support" className="space-y-8">
+              <div>
+                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                  <MessageSquare className="h-6 w-6 text-orange-600" />
+                  Communication & Customer Support
+                </h3>
+                <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-3">
+                  <Card><CardHeader className="p-4"><MessageSquare className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Ticketing System</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Bell className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Bulk SMS/Email Notifications</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><UserCheck className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Onboarding Assistant</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><TrendingUp className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Marketing & Promotions</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Bot className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Live Chat Support</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><HelpCircle className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">FAQ / Knowledge Base</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><MessageSquare className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Feedback Collection</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><FileText className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Issue Resolution Tracker</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Users className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Customer Satisfaction</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Download className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Templates & Resources</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><Bell className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Priority Alerts</CardTitle></CardHeader></Card>
+                  <Card><CardHeader className="p-4"><HelpCircle className="h-5 w-5 text-green-600 mb-1" /><CardTitle className="text-xs">Support Help Center</CardTitle></CardHeader></Card>
+                </div>
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
       </section>
 
