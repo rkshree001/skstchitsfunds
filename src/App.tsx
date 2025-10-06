@@ -23,8 +23,33 @@ import MyChits from "./pages/user/MyChits";
 import Auctions from "./pages/user/Auctions";
 import KYC from "./pages/user/KYC";
 import Referrals from "./pages/user/Referrals";
+import PayoutCalculator from "./pages/user/PayoutCalculator";
+import Payments from "./pages/user/Payments";
+import Ledger from "./pages/user/Ledger";
+import Analytics from "./pages/user/Analytics";
+import Refunds from "./pages/user/Refunds";
+import AIAssistant from "./pages/user/AIAssistant";
+import Feedback from "./pages/user/Feedback";
+import UserNotifications from "./pages/user/Notifications";
+import UserDownloads from "./pages/user/Downloads";
+import UserHelp from "./pages/user/Help";
+import FieldTracking from "./pages/admin/FieldTracking";
+import BranchPerformance from "./pages/admin/BranchPerformance";
+import ActivityLog from "./pages/admin/ActivityLog";
+import RoleManagement from "./pages/admin/RoleManagement";
+import AdminNotifications from "./pages/admin/Notifications";
+import AdminDownloads from "./pages/admin/Downloads";
+import AdminHelp from "./pages/admin/Help";
+import BranchOverview from "./pages/sadmin/BranchOverview";
+import ComplianceReports from "./pages/sadmin/ComplianceReports";
+import AIInsights from "./pages/sadmin/AIInsights";
+import Settings from "./pages/sadmin/Settings";
 import SupportLogin from "./pages/support/Login";
 import SupportDashboard from "./pages/support/Dashboard";
+import Tickets from "./pages/support/Tickets";
+import BulkNotifications from "./pages/support/BulkNotifications";
+import Onboarding from "./pages/support/Onboarding";
+import Promotions from "./pages/support/Promotions";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -49,15 +74,40 @@ const App = () => (
           <Route path="/user/auctions" element={<Auctions />} />
           <Route path="/user/kyc" element={<KYC />} />
           <Route path="/user/referrals" element={<Referrals />} />
+          <Route path="/user/calculator" element={<PayoutCalculator />} />
+          <Route path="/user/payments" element={<Payments />} />
+          <Route path="/user/ledger" element={<Ledger />} />
+          <Route path="/user/analytics" element={<Analytics />} />
+          <Route path="/user/refunds" element={<Refunds />} />
+          <Route path="/user/ai-assistant" element={<AIAssistant />} />
+          <Route path="/user/feedback" element={<Feedback />} />
+          <Route path="/user/notifications" element={<UserNotifications />} />
+          <Route path="/user/downloads" element={<UserDownloads />} />
+          <Route path="/user/help" element={<UserHelp />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/payment-update" element={<PaymentUpdate />} />
           <Route path="/admin/user-management" element={<UserManagement />} />
           <Route path="/admin/add-user" element={<AddUser />} />
+          <Route path="/admin/field-tracking" element={<FieldTracking />} />
+          <Route path="/admin/branch-performance" element={<BranchPerformance />} />
+          <Route path="/admin/activity-log" element={<ActivityLog />} />
+          <Route path="/admin/role-management" element={<RoleManagement />} />
+          <Route path="/admin/notifications" element={<AdminNotifications />} />
+          <Route path="/admin/downloads" element={<AdminDownloads />} />
+          <Route path="/admin/help" element={<AdminHelp />} />
           <Route path="/sadmin/dashboard" element={<SuperAdminDashboard />} />
           <Route path="/sadmin/branch-management" element={<BranchManagement />} />
           <Route path="/sadmin/add-branch" element={<AddBranch />} />
+          <Route path="/sadmin/branch-overview" element={<BranchOverview />} />
+          <Route path="/sadmin/compliance" element={<ComplianceReports />} />
+          <Route path="/sadmin/ai-insights" element={<AIInsights />} />
+          <Route path="/sadmin/settings" element={<Settings />} />
           <Route path="/support/login" element={<SupportLogin />} />
           <Route path="/support/dashboard" element={<SupportDashboard />} />
+          <Route path="/support/tickets" element={<Tickets />} />
+          <Route path="/support/bulk-notifications" element={<BulkNotifications />} />
+          <Route path="/support/onboarding" element={<Onboarding />} />
+          <Route path="/support/promotions" element={<Promotions />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
