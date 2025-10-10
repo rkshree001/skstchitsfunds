@@ -10,6 +10,28 @@ This is a modern single-page application built with React and TypeScript, featur
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes
+
+### October 10, 2025
+- **Multi-Step Onboarding System**: Implemented comprehensive 6-step account registration flow
+  - Step 1: Personal Information (Title, Name, Email, Mobile, DOB, Gender, PAN, Occupation, Income)
+  - Step 2: Address Details (Current and Permanent addresses with same-as-current option)
+  - Step 3: Chit Plan Selection (4 plan tiers: Starter, Growth, Premium, Elite)
+  - Step 4: Document Upload (PAN, Aadhar, Address Proof, Income Proof with security features)
+  - Step 5: Referral Code (Optional referral program integration)
+  - Step 6: Review & Submit (Complete data review with terms acceptance)
+  - Added step progress indicator and draft save functionality
+  - Route: `/account/onboarding`
+
+- **Enhanced User Dashboard Pages**: Created new enhanced versions of core user pages
+  - Enhanced Dashboard (`/user/enhanced-dashboard`): Comprehensive overview with stats cards, active chit funds, payment reminders, analytics charts, quick actions, and financial health score
+  - Enhanced Payment Calendar (`/user/enhanced-calendar`): Monthly calendar view with payment tracking, trends chart, and multi-filter options
+  - Enhanced Transaction History (`/user/enhanced-transactions`): Advanced filtering, search, payment trends, multiple export formats (PDF/CSV), and detailed transaction table
+  - Enhanced Chit Auctions (`/user/enhanced-auctions`): Live auction management, bidding interface, table/grid view toggle, winner alerts, and comprehensive auction history
+
+- **Routing Updates**: Connected all new onboarding and enhanced pages to App.tsx routing system
+- **Index Page Update**: Updated "Get Started" CTA to redirect to new onboarding flow
+
 ## System Architecture
 
 ### Frontend Architecture
