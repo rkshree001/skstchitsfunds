@@ -83,6 +83,11 @@ import PenaltyCalculator from "./pages/user/PenaltyCalculator";
 import ROIPrediction from "./pages/user/ROIPrediction";
 import Leaderboard from "./pages/user/Leaderboard";
 import AIAdvisor from "./pages/user/AIAdvisor";
+import AccountOnboarding from "./pages/AccountOnboarding";
+import EnhancedDashboard from "./pages/user/EnhancedDashboard";
+import EnhancedPaymentCalendar from "./pages/user/EnhancedPaymentCalendar";
+import EnhancedTransactions from "./pages/user/EnhancedTransactions";
+import EnhancedAuctions from "./pages/user/EnhancedAuctions";
 
 const queryClient = new QueryClient();
 
@@ -97,6 +102,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/account/onboarding" element={<AccountOnboarding />} />
           <Route path="/calculator" element={<Calculator />} />
           <Route path="/support" element={<Support />} />
           <Route path="/about" element={<About />} />
@@ -104,15 +110,19 @@ const App = () => (
           <Route path="/user/home" element={<UserHome />} />
           <Route element={<UserLayout />}>
             <Route path="/user/dashboard" element={<UserDashboard />} />
+            <Route path="/user/enhanced-dashboard" element={<EnhancedDashboard />} />
             <Route path="/user/transactions" element={<UserTransactions />} />
+            <Route path="/user/enhanced-transactions" element={<EnhancedTransactions />} />
             <Route path="/user/my-chits" element={<MyChits />} />
             <Route path="/user/auctions" element={<Auctions />} />
+            <Route path="/user/enhanced-auctions" element={<EnhancedAuctions />} />
             <Route path="/user/kyc" element={<KYC />} />
             <Route path="/user/referrals" element={<Referrals />} />
             <Route path="/user/rewards" element={<UserRewards />} />
             <Route path="/user/passbook" element={<UserPassbook />} />
             <Route path="/user/chit-plans" element={<ChitPlans />} />
             <Route path="/user/calendar" element={<UserCalendar />} />
+            <Route path="/user/enhanced-calendar" element={<EnhancedPaymentCalendar />} />
             <Route path="/user/payout-calculator" element={<PayoutCalculator />} />
             <Route path="/user/payments" element={<Payments />} />
             <Route path="/user/ledger" element={<Ledger />} />

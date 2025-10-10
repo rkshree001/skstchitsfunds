@@ -41,7 +41,7 @@ const Index = () => {
               Join thousands of members building wealth through trusted chit fund programs. Save smart, borrow better, grow together.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button onClick={() => navigate("/login")} size="lg" variant="secondary" className="text-lg">
+              <Button onClick={() => navigate("/account/onboarding")} size="lg" variant="secondary" className="text-lg">
                 Get Started
               </Button>
               <Button onClick={() => navigate("/calculator")} size="lg" variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
