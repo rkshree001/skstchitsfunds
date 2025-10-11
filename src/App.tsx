@@ -88,6 +88,20 @@ import EnhancedDashboard from "./pages/user/EnhancedDashboard";
 import EnhancedPaymentCalendar from "./pages/user/EnhancedPaymentCalendar";
 import EnhancedTransactions from "./pages/user/EnhancedTransactions";
 import EnhancedAuctions from "./pages/user/EnhancedAuctions";
+import GuestDashboard from "./pages/GuestDashboard";
+import EMandate from "./pages/user/EMandate";
+import DigitalWallet from "./pages/user/DigitalWallet";
+import VideoKYC from "./pages/user/VideoKYC";
+import Community from "./pages/user/Community";
+import LoanAgainstChit from "./pages/user/LoanAgainstChit";
+import CollectionAgents from "./pages/admin/CollectionAgents";
+import LegalRecovery from "./pages/admin/LegalRecovery";
+import FraudDetection from "./pages/admin/FraudDetection";
+import DocumentManagement from "./pages/admin/DocumentManagement";
+import PredictiveAnalytics from "./pages/sadmin/PredictiveAnalytics";
+import RBICompliance from "./pages/sadmin/RBICompliance";
+import WhatsAppIntegration from "./pages/support/WhatsAppIntegration";
+import CampaignManager from "./pages/support/CampaignManager";
 
 const queryClient = new QueryClient();
 
@@ -100,6 +114,7 @@ const App = () => (
         <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/guest" element={<GuestDashboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/account/onboarding" element={<AccountOnboarding />} />
@@ -141,6 +156,11 @@ const App = () => (
             <Route path="/user/roi-prediction" element={<ROIPrediction />} />
             <Route path="/user/leaderboard" element={<Leaderboard />} />
             <Route path="/user/ai-advisor" element={<AIAdvisor />} />
+            <Route path="/user/emandate" element={<EMandate />} />
+            <Route path="/user/digital-wallet" element={<DigitalWallet />} />
+            <Route path="/user/video-kyc" element={<VideoKYC />} />
+            <Route path="/user/community" element={<Community />} />
+            <Route path="/user/loan-against-chit" element={<LoanAgainstChit />} />
           </Route>
           <Route path="/admin/home" element={<AdminHome />} />
           <Route element={<AdminLayout />}>
@@ -160,6 +180,10 @@ const App = () => (
             <Route path="/admin/notifications" element={<AdminNotifications />} />
             <Route path="/admin/downloads" element={<AdminDownloads />} />
             <Route path="/admin/help" element={<AdminHelp />} />
+            <Route path="/admin/collection-agents" element={<CollectionAgents />} />
+            <Route path="/admin/legal-recovery" element={<LegalRecovery />} />
+            <Route path="/admin/fraud-detection" element={<FraudDetection />} />
+            <Route path="/admin/document-management" element={<DocumentManagement />} />
           </Route>
           <Route path="/sadmin/home" element={<SadminHome />} />
           <Route element={<SadminLayout />}>
@@ -173,6 +197,8 @@ const App = () => (
             <Route path="/sadmin/downloads" element={<SadminDownloads />} />
             <Route path="/sadmin/notifications" element={<SadminNotifications />} />
             <Route path="/sadmin/help" element={<SadminHelp />} />
+            <Route path="/sadmin/predictive-analytics" element={<PredictiveAnalytics />} />
+            <Route path="/sadmin/rbi-compliance" element={<RBICompliance />} />
           </Route>
           <Route path="/support/home" element={<SupportHome />} />
           <Route path="/support/login" element={<SupportLogin />} />
@@ -185,6 +211,8 @@ const App = () => (
             <Route path="/support/downloads" element={<SupportDownloads />} />
             <Route path="/support/notifications" element={<SupportNotifications />} />
             <Route path="/support/help" element={<SupportHelp />} />
+            <Route path="/support/whatsapp-integration" element={<WhatsAppIntegration />} />
+            <Route path="/support/campaign-manager" element={<CampaignManager />} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
