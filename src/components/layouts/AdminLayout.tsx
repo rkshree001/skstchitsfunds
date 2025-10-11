@@ -59,6 +59,9 @@ export default function AdminLayout() {
   const NavContent = () => (
     <div className="flex flex-col h-full">
       <div className="p-4 border-b">
+        <div className="flex items-center gap-3 mb-2">
+          <img src="/skst-logo.png" alt="SKST Logo" className="h-8" />
+        </div>
         <h2 className="text-xl font-bold">Admin Panel</h2>
       </div>
       <nav className="flex-1 overflow-y-auto p-4 space-y-1">
@@ -82,8 +85,8 @@ export default function AdminLayout() {
 
   return (
     <div className="min-h-screen flex w-full">
-      {/* Desktop Sidebar */}
-      <aside className="hidden md:flex w-64 border-r bg-card">
+      {/* Desktop Sidebar - Fixed/Sticky */}
+      <aside className="hidden md:flex md:fixed md:left-0 md:top-0 md:h-screen w-64 border-r bg-card z-40">
         <NavContent />
       </aside>
 
@@ -105,7 +108,7 @@ export default function AdminLayout() {
       </div>
 
       {/* Main Content */}
-      <main className="flex-1 md:mt-0 mt-16">
+      <main className="flex-1 md:mt-0 mt-16 md:ml-64">
         <Outlet />
       </main>
     </div>
