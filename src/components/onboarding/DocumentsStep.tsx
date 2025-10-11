@@ -55,7 +55,7 @@ const DocumentsStep = ({ data, onNext, onPrevious, onSaveDraft }: DocumentsStepP
         <p className="text-xs text-muted-foreground">{subtitle}</p>
         
         {!doc ? (
-          <div className="border-2 border-dashed border-muted-foreground/20 rounded-lg p-8 text-center hover:border-primary/50 transition-all">
+          <div className="border-2 border-dashed border-muted-foreground/20 rounded-lg p-8 text-center hover:border-primary/50 transition-all min-h-[160px] flex flex-col items-center justify-center">
             <Upload className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
             <p className="text-sm font-medium mb-1">Upload Document</p>
             <p className="text-xs text-muted-foreground mb-4">
@@ -79,18 +79,18 @@ const DocumentsStep = ({ data, onNext, onPrevious, onSaveDraft }: DocumentsStepP
             </Button>
           </div>
         ) : (
-          <Card className="p-4 border-green-500/50 bg-green-50 dark:bg-green-950/20">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+          <Card className="p-6 border-green-500/50 bg-green-50 dark:bg-green-950/20 min-h-[160px] flex items-center">
+            <div className="flex items-center gap-3 w-full">
+              <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
                 <Check className="h-5 w-5 text-white" />
               </div>
-              <div className="flex-1">
-                <p className="text-sm font-medium">{doc.name}</p>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium truncate">{doc.name}</p>
                 <p className="text-xs text-muted-foreground">
                   {doc.size} • Uploaded successfully
                 </p>
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-2 flex-shrink-0">
                 <Button
                   type="button"
                   variant="outline"
