@@ -13,47 +13,48 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Shield className="h-8 w-8 text-primary" />
-            <span className="text-2xl font-bold">SKST Chit Funds</span>
+      <header className="border-b bg-card/80 backdrop-blur-md sticky top-0 z-50 shadow-sm transition-smooth">
+        <div className="container mx-auto px-4 py-5 flex items-center justify-between">
+          <div className="flex items-center gap-3 hover-glow rounded-lg px-2 py-1">
+            <Shield className="h-9 w-9 text-primary transition-transform hover:scale-110" />
+            <span className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">SKST Chit Funds</span>
           </div>
-          <nav className="hidden md:flex items-center gap-4">
-            <a href="#about" className="text-muted-foreground hover:text-foreground transition-colors">About</a>
-            <a href="#modules" className="text-muted-foreground hover:text-foreground transition-colors">Modules</a>
-            <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a>
+          <nav className="hidden md:flex items-center gap-6">
+            <a href="#about" className="text-muted-foreground hover:text-primary transition-smooth font-medium">About</a>
+            <a href="#modules" className="text-muted-foreground hover:text-primary transition-smooth font-medium">Modules</a>
+            <a href="#features" className="text-muted-foreground hover:text-primary transition-smooth font-medium">Features</a>
             <LanguageSelector />
             <ThemeToggle />
-            <Button onClick={() => navigate("/login")} variant="default" data-testid="button-header-login">Login</Button>
+            <Button onClick={() => navigate("/login")} variant="default" className="shadow-soft hover:shadow-medium transition-smooth" data-testid="button-header-login">Login</Button>
           </nav>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="relative gradient-hero py-24 md:py-32 text-primary-foreground overflow-hidden">
+      <section className="relative gradient-hero py-28 md:py-40 text-primary-foreground overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.1),transparent_50%)] pointer-events-none"></div>
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+          <div className="max-w-4xl mx-auto text-center animate-fade-in">
+            <h1 className="font-bold mb-6 animate-slide-up">
               Secure Your Financial Future with SKST Chit Funds
             </h1>
-            <p className="text-lg md:text-xl mb-8 opacity-90">
+            <p className="text-lg md:text-xl mb-10 opacity-95 max-w-2xl mx-auto leading-relaxed">
               Join thousands of members building wealth through trusted chit fund programs. Save smart, borrow better, grow together.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button onClick={() => navigate("/account/onboarding")} size="lg" variant="secondary" className="text-lg">
+            <div className="flex flex-col sm:flex-row gap-5 justify-center items-center animate-scale-in">
+              <Button onClick={() => navigate("/account/onboarding")} size="lg" variant="secondary" className="text-lg shadow-xl hover:shadow-2xl transition-smooth hover:scale-105 px-8">
                 Get Started
               </Button>
-              <Button onClick={() => navigate("/calculator")} size="lg" variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
+              <Button onClick={() => navigate("/calculator")} size="lg" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/25 backdrop-blur-sm transition-smooth hover:scale-105 px-8">
                 Calculate Returns
               </Button>
-              <Button onClick={() => navigate("/support/login")} size="lg" variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
+              <Button onClick={() => navigate("/support/login")} size="lg" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/25 backdrop-blur-sm transition-smooth hover:scale-105 px-8">
                 Support Portal
               </Button>
             </div>
           </div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/30"></div>
       </section>
 
       {/* Features Section */}
@@ -64,62 +65,74 @@ const Index = () => {
             <p className="text-muted-foreground text-lg">Trusted financial solutions for your savings and investment needs</p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-6">
-            <Card className="shadow-soft hover:shadow-medium transition-shadow">
-              <CardHeader>
-                <Shield className="h-12 w-12 text-primary mb-2" />
-                <CardTitle>100% Secure</CardTitle>
-                <CardDescription>
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="shadow-soft hover-lift border-0 bg-gradient-to-br from-white to-blue-50/30 dark:from-card dark:to-blue-950/20">
+              <CardHeader className="space-y-4">
+                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center shadow-sm">
+                  <Shield className="h-9 w-9 text-primary" />
+                </div>
+                <CardTitle className="text-xl">100% Secure</CardTitle>
+                <CardDescription className="text-base leading-relaxed">
                   Your investments are protected with bank-grade security and regulatory compliance
                 </CardDescription>
               </CardHeader>
             </Card>
 
-            <Card className="shadow-soft hover:shadow-medium transition-shadow">
-              <CardHeader>
-                <TrendingUp className="h-12 w-12 text-primary mb-2" />
-                <CardTitle>High Returns</CardTitle>
-                <CardDescription>
+            <Card className="shadow-soft hover-lift border-0 bg-gradient-to-br from-white to-teal-50/30 dark:from-card dark:to-teal-950/20">
+              <CardHeader className="space-y-4">
+                <div className="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center shadow-sm">
+                  <TrendingUp className="h-9 w-9 text-secondary" />
+                </div>
+                <CardTitle className="text-xl">High Returns</CardTitle>
+                <CardDescription className="text-base leading-relaxed">
                   Earn competitive interest rates of up to 5% on your monthly premiums
                 </CardDescription>
               </CardHeader>
             </Card>
 
-            <Card className="shadow-soft hover:shadow-medium transition-shadow">
-              <CardHeader>
-                <Users className="h-12 w-12 text-primary mb-2" />
-                <CardTitle>Community Trust</CardTitle>
-                <CardDescription>
+            <Card className="shadow-soft hover-lift border-0 bg-gradient-to-br from-white to-blue-50/30 dark:from-card dark:to-blue-950/20">
+              <CardHeader className="space-y-4">
+                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center shadow-sm">
+                  <Users className="h-9 w-9 text-primary" />
+                </div>
+                <CardTitle className="text-xl">Community Trust</CardTitle>
+                <CardDescription className="text-base leading-relaxed">
                   Join 500+ active members across 5 branches building wealth together
                 </CardDescription>
               </CardHeader>
             </Card>
 
-            <Card className="shadow-soft hover:shadow-medium transition-shadow">
-              <CardHeader>
-                <Calculator className="h-12 w-12 text-primary mb-2" />
-                <CardTitle>Flexible Plans</CardTitle>
-                <CardDescription>
+            <Card className="shadow-soft hover-lift border-0 bg-gradient-to-br from-white to-amber-50/30 dark:from-card dark:to-amber-950/20">
+              <CardHeader className="space-y-4">
+                <div className="w-16 h-16 rounded-2xl bg-warning/10 flex items-center justify-center shadow-sm">
+                  <Calculator className="h-9 w-9 text-warning" />
+                </div>
+                <CardTitle className="text-xl">Flexible Plans</CardTitle>
+                <CardDescription className="text-base leading-relaxed">
                   Choose from multiple chit durations and amounts that fit your budget
                 </CardDescription>
               </CardHeader>
             </Card>
 
-            <Card className="shadow-soft hover:shadow-medium transition-shadow">
-              <CardHeader>
-                <Clock className="h-12 w-12 text-primary mb-2" />
-                <CardTitle>Quick Access</CardTitle>
-                <CardDescription>
+            <Card className="shadow-soft hover-lift border-0 bg-gradient-to-br from-white to-teal-50/30 dark:from-card dark:to-teal-950/20">
+              <CardHeader className="space-y-4">
+                <div className="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center shadow-sm">
+                  <Clock className="h-9 w-9 text-secondary" />
+                </div>
+                <CardTitle className="text-xl">Quick Access</CardTitle>
+                <CardDescription className="text-base leading-relaxed">
                   Get funds when you need them through our monthly auction system
                 </CardDescription>
               </CardHeader>
             </Card>
 
-            <Card className="shadow-soft hover:shadow-medium transition-shadow">
-              <CardHeader>
-                <Award className="h-12 w-12 text-primary mb-2" />
-                <CardTitle>Transparent Process</CardTitle>
-                <CardDescription>
+            <Card className="shadow-soft hover-lift border-0 bg-gradient-to-br from-white to-green-50/30 dark:from-card dark:to-green-950/20">
+              <CardHeader className="space-y-4">
+                <div className="w-16 h-16 rounded-2xl bg-success/10 flex items-center justify-center shadow-sm">
+                  <Award className="h-9 w-9 text-success" />
+                </div>
+                <CardTitle className="text-xl">Transparent Process</CardTitle>
+                <CardDescription className="text-base leading-relaxed">
                   Clear terms, no hidden charges, and regular updates on your investments
                 </CardDescription>
               </CardHeader>
@@ -129,7 +142,7 @@ const Index = () => {
       </section>
 
       {/* Comprehensive Modules Showcase */}
-      <section id="modules" className="py-16 md:py-24 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      <section id="modules" className="py-16 md:py-24 bg-gradient-to-br from-blue-50/50 to-teal-50/50 dark:from-gray-900 dark:to-gray-800">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <Badge className="mb-4" variant="secondary">Complete Feature Set - 86 Modules</Badge>
@@ -140,7 +153,7 @@ const Index = () => {
           </div>
 
           <Tabs defaultValue="user" className="w-full">
-            <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-4 mb-8">
+            <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-4 mb-8 h-12 bg-muted/50 backdrop-blur-sm shadow-sm">
               <TabsTrigger value="user" data-testid="tab-user-modules">User Modules</TabsTrigger>
               <TabsTrigger value="admin" data-testid="tab-admin-modules">Admin Panel</TabsTrigger>
               <TabsTrigger value="sadmin" data-testid="tab-sadmin-modules">Super Admin</TabsTrigger>
