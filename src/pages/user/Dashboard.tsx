@@ -92,16 +92,22 @@ const UserDashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-background via-muted/10 to-background">
       {/* Header */}
-      <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl font-bold">User Dashboard</span>
+      <header className="border-b bg-card/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <div className="container mx-auto px-4 py-5 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full gradient-primary flex items-center justify-center text-white font-bold shadow-md">
+              RK
+            </div>
+            <div>
+              <h1 className="text-xl font-bold">User Dashboard</h1>
+              <p className="text-xs text-muted-foreground">Manage your chit funds</p>
+            </div>
           </div>
           <div className="flex items-center gap-4">
-            <span className="text-muted-foreground hidden md:inline">Welcome, Rajesh Kumar</span>
-            <Button onClick={() => navigate("/")} variant="outline" size="sm">
+            <span className="text-muted-foreground hidden md:inline font-medium">Welcome, Rajesh Kumar</span>
+            <Button onClick={() => navigate("/")} variant="outline" size="sm" className="shadow-sm hover:shadow-md transition-smooth">
               <LogOut className="h-4 w-4 mr-2" />
               Logout
             </Button>
@@ -111,32 +117,48 @@ const UserDashboard = () => {
 
       <div className="container mx-auto px-4 py-8">
         {/* Quick Stats */}
-        <div className="grid md:grid-cols-4 gap-4 mb-8">
-          <Card className="shadow-soft">
-            <CardHeader className="pb-2">
-              <CardDescription>Chit Amount</CardDescription>
-              <CardTitle className="text-3xl">₹{chitDetails.amount.toLocaleString()}</CardTitle>
+        <div className="grid md:grid-cols-4 gap-6 mb-8 animate-fade-in">
+          <Card className="shadow-soft hover-lift border-0 bg-gradient-to-br from-blue-500 to-blue-600 text-white">
+            <CardHeader className="pb-3">
+              <CardDescription className="text-blue-100 font-medium">Chit Amount</CardDescription>
+              <CardTitle className="text-4xl font-bold">₹{chitDetails.amount.toLocaleString()}</CardTitle>
+              <div className="flex items-center gap-1 text-blue-100 text-sm mt-2">
+                <Wallet className="h-4 w-4" />
+                <span>Total Plan Value</span>
+              </div>
             </CardHeader>
           </Card>
 
-          <Card className="shadow-soft">
-            <CardHeader className="pb-2">
-              <CardDescription>Monthly Premium</CardDescription>
-              <CardTitle className="text-3xl">₹{chitDetails.premium.toLocaleString()}</CardTitle>
+          <Card className="shadow-soft hover-lift border-0 bg-gradient-to-br from-teal-500 to-teal-600 text-white">
+            <CardHeader className="pb-3">
+              <CardDescription className="text-teal-100 font-medium">Monthly Premium</CardDescription>
+              <CardTitle className="text-4xl font-bold">₹{chitDetails.premium.toLocaleString()}</CardTitle>
+              <div className="flex items-center gap-1 text-teal-100 text-sm mt-2">
+                <IndianRupee className="h-4 w-4" />
+                <span>Per Month</span>
+              </div>
             </CardHeader>
           </Card>
 
-          <Card className="shadow-soft">
-            <CardHeader className="pb-2">
-              <CardDescription>Interest Rate</CardDescription>
-              <CardTitle className="text-3xl">{chitDetails.interest}%</CardTitle>
+          <Card className="shadow-soft hover-lift border-0 bg-gradient-to-br from-amber-500 to-amber-600 text-white">
+            <CardHeader className="pb-3">
+              <CardDescription className="text-amber-100 font-medium">Interest Rate</CardDescription>
+              <CardTitle className="text-4xl font-bold">{chitDetails.interest}%</CardTitle>
+              <div className="flex items-center gap-1 text-amber-100 text-sm mt-2">
+                <TrendingUp className="h-4 w-4" />
+                <span>Annual Returns</span>
+              </div>
             </CardHeader>
           </Card>
 
-          <Card className="shadow-soft">
-            <CardHeader className="pb-2">
-              <CardDescription>Payments Made</CardDescription>
-              <CardTitle className="text-3xl">{chitDetails.paidMonths}/{chitDetails.duration}</CardTitle>
+          <Card className="shadow-soft hover-lift border-0 bg-gradient-to-br from-green-500 to-green-600 text-white">
+            <CardHeader className="pb-3">
+              <CardDescription className="text-green-100 font-medium">Payments Made</CardDescription>
+              <CardTitle className="text-4xl font-bold">{chitDetails.paidMonths}/{chitDetails.duration}</CardTitle>
+              <div className="flex items-center gap-1 text-green-100 text-sm mt-2">
+                <Calendar className="h-4 w-4" />
+                <span>{Math.round((chitDetails.paidMonths / chitDetails.duration) * 100)}% Complete</span>
+              </div>
             </CardHeader>
           </Card>
         </div>
@@ -144,14 +166,14 @@ const UserDashboard = () => {
         {/* Main Content Grid */}
         <div className="grid lg:grid-cols-3 gap-6 mb-8">
           {/* Chit Details */}
-          <Card className="lg:col-span-2 shadow-medium">
+          <Card className="lg:col-span-2 shadow-medium hover-lift border-0 bg-gradient-to-br from-white to-blue-50/50 dark:from-card dark:to-blue-950/20">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardTitle>Your Active Chit Plan</CardTitle>
-                  <CardDescription>1-Year savings plan with competitive returns</CardDescription>
+                  <CardTitle className="text-2xl">Your Active Chit Plan</CardTitle>
+                  <CardDescription className="text-base">1-Year savings plan with competitive returns</CardDescription>
                 </div>
-                <Badge variant="default" className="bg-success">Active</Badge>
+                <Badge variant="default" className="bg-success shadow-sm px-3 py-1 text-sm">Active</Badge>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -190,10 +212,10 @@ const UserDashboard = () => {
           </Card>
 
           {/* Quick Actions */}
-          <Card className="shadow-medium">
+          <Card className="shadow-medium hover-lift border-0 bg-gradient-to-br from-white to-teal-50/50 dark:from-card dark:to-teal-950/20">
             <CardHeader>
-              <CardTitle>Quick Actions</CardTitle>
-              <CardDescription>Manage your account</CardDescription>
+              <CardTitle className="text-2xl">Quick Actions</CardTitle>
+              <CardDescription className="text-base">Manage your account</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
               <Button onClick={() => navigate("/calculator")} variant="outline" className="w-full justify-start">
