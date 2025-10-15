@@ -12,6 +12,21 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### October 15, 2025
+- **Color Scheme Update**: Restored the original professional color palette
+  - Primary color changed from bright blue `hsl(210 100% 50%)` to professional blue `hsl(215 85% 35%)`
+  - Secondary color changed from teal `hsl(173 80% 40%)` to gold/yellow `hsl(45 90% 55%)`
+  - Updated gradients and all color tokens across light and dark themes
+  - Improved visual consistency and professional appearance throughout the application
+
+- **AI Chatbot Redesign**: Enhanced the AI assistant interface with modern design
+  - Redesigned floating trigger button with sparkle icon and gradient background
+  - Added gradient header with professional blue color scheme
+  - Improved message bubbles with rounded corners and better spacing
+  - Enhanced loading state with "Thinking..." indicator
+  - Added border accent to chat card for better visual hierarchy
+  - Updated input field with rounded design and improved focus states
+
 ### October 10, 2025
 - **Multi-Step Onboarding System**: Implemented comprehensive 6-step account registration flow
   - Step 1: Personal Information (Title, Name, Email, Mobile, DOB, Gender, PAN, Occupation, Income)
@@ -123,10 +138,11 @@ The application uses a hierarchical routing system organized by user roles:
 
 **Design System**
 - Custom CSS variables for colors in HSL format
-- Primary color: `hsl(215 85% 35%)` (blue)
-- Secondary color: `hsl(45 90% 55%)` (yellow/gold)
+- Primary color: `hsl(215 85% 35%)` (professional blue)
+- Secondary color: `hsl(45 90% 55%)` (gold/yellow accent)
 - Additional semantic colors: success (green), warning (orange), destructive (red)
 - Light/dark theme support with `.dark` class selector
+- Gradient combinations for hero sections and UI accents
 
 **Component Styling Approach**
 - Tailwind utility classes for layout and spacing
