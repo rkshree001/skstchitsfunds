@@ -23,6 +23,7 @@ import {
   Menu,
   Home
 } from "lucide-react";
+import AIAssistantChat from "@/components/AIAssistantChat";
 
 const navItems = [
   { title: "Dashboard", path: "/support/dashboard", icon: Home },
@@ -94,6 +95,9 @@ export default function SupportLayout() {
       <main className="flex-1 md:mt-0 mt-16 md:ml-64">
         <Outlet />
       </main>
+
+      {/* AI Assistant Chat */}
+      <AIAssistantChat portalType="support" />
     </div>
   );
 }

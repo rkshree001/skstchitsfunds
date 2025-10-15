@@ -41,6 +41,7 @@ import {
   Code,
   Zap
 } from "lucide-react";
+import AIAssistantChat from "@/components/AIAssistantChat";
 
 const navItems = [
   { title: "Dashboard", path: "/user/dashboard", icon: Home },
@@ -132,6 +133,9 @@ export default function UserLayout() {
       <main className="flex-1 md:mt-0 mt-16 md:ml-64">
         <Outlet />
       </main>
+
+      {/* AI Assistant Chat */}
+      <AIAssistantChat portalType="user" />
     </div>
   );
 }
