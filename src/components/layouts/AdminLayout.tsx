@@ -59,9 +59,6 @@ export default function AdminLayout() {
   const NavContent = () => (
     <div className="flex flex-col h-full">
       <div className="p-4 border-b">
-        <div className="flex items-center gap-3 mb-2">
-          <img src="/skst-logo.png" alt="SKST Logo" className="h-8" />
-        </div>
         <h2 className="text-xl font-bold">Admin Panel</h2>
       </div>
       <nav className="flex-1 overflow-y-auto p-4 space-y-1">
