@@ -33,23 +33,20 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen gradient-hero flex items-center justify-center p-4 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_70%)] pointer-events-none"></div>
-      <div className="w-full max-w-5xl relative z-10 animate-fade-in">
+    <div className="min-h-screen gradient-hero flex items-center justify-center p-4">
+      <div className="w-full max-w-5xl">
         {/* Header */}
-        <div className="text-center mb-10">
-          <div className="flex items-center justify-center gap-3 mb-4 animate-scale-in">
-            <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-sm flex items-center justify-center shadow-xl">
-              <Shield className="h-9 w-9 text-primary-foreground" />
-            </div>
-            <span className="text-5xl font-bold text-primary-foreground drop-shadow-lg">SKST Chit Funds</span>
+        <div className="text-center mb-8">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <Shield className="h-12 w-12 text-primary-foreground" />
+            <span className="text-4xl font-bold text-primary-foreground">SKST Chit Funds</span>
           </div>
-          <p className="text-primary-foreground/90 text-xl font-medium">Secure Login Portal</p>
+          <p className="text-primary-foreground/80 text-lg">Secure Login Portal</p>
         </div>
 
         {/* Login Tabs */}
         <Tabs defaultValue="user" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-8 h-14 bg-white/10 backdrop-blur-md border border-white/20 shadow-xl">
+          <TabsList className="grid w-full grid-cols-3 mb-8">
             <TabsTrigger value="user" className="flex items-center gap-2">
               <UserCircle className="h-4 w-4" />
               User
@@ -66,10 +63,10 @@ const Login = () => {
 
           {/* User Login */}
           <TabsContent value="user">
-            <Card className="shadow-xl border-0 bg-white/95 dark:bg-card/95 backdrop-blur-md">
-              <CardHeader className="space-y-2 pb-6">
-                <CardTitle className="text-3xl">User Login</CardTitle>
-                <CardDescription className="text-base">Access your chit fund dashboard and manage your investments</CardDescription>
+            <Card className="shadow-large">
+              <CardHeader>
+                <CardTitle className="text-2xl">User Login</CardTitle>
+                <CardDescription>Access your chit fund dashboard and manage your investments</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
@@ -98,10 +95,10 @@ const Login = () => {
 
           {/* Admin Login */}
           <TabsContent value="admin">
-            <Card className="shadow-xl border-0 bg-white/95 dark:bg-card/95 backdrop-blur-md">
-              <CardHeader className="space-y-2 pb-6">
-                <CardTitle className="text-3xl">Admin Login</CardTitle>
-                <CardDescription className="text-base">Access the control panel to manage users and collections</CardDescription>
+            <Card className="shadow-large">
+              <CardHeader>
+                <CardTitle className="text-2xl">Admin Login</CardTitle>
+                <CardDescription>Access the control panel to manage users and collections</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
@@ -129,10 +126,10 @@ const Login = () => {
 
           {/* Super Admin Login */}
           <TabsContent value="sadmin">
-            <Card className="shadow-xl border-0 bg-white/95 dark:bg-card/95 backdrop-blur-md">
-              <CardHeader className="space-y-2 pb-6">
-                <CardTitle className="text-3xl">Super Admin Login</CardTitle>
-                <CardDescription className="text-base">Full system access for branch and role management</CardDescription>
+            <Card className="shadow-large">
+              <CardHeader>
+                <CardTitle className="text-2xl">Super Admin Login</CardTitle>
+                <CardDescription>Full system access for branch and role management</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
