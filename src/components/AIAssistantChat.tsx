@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Bot, Send, X, Loader2 } from "lucide-react";
+import { Bot, Send, X, Loader2, Sparkles } from "lucide-react";
 import { sendChatMessage, ChatMessage } from "@/lib/gemini";
 import { toast } from "sonner";
 
@@ -60,31 +60,34 @@ export default function AIAssistantChat({ portalType = "user" }: AIAssistantChat
     return (
       <Button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg z-50"
+        className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-br from-primary to-primary-dark hover:scale-110 z-50"
         size="icon"
       >
-        <Bot className="h-6 w-6" />
+        <Sparkles className="h-6 w-6 animate-pulse" />
       </Button>
     );
   }
 
   return (
-    <Card className="fixed bottom-6 right-6 w-96 h-[500px] shadow-xl z-50 flex flex-col">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+    <Card className="fixed bottom-6 right-6 w-96 h-[550px] shadow-2xl z-50 flex flex-col border-2 border-primary/20 overflow-hidden">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3 bg-gradient-to-r from-primary to-primary-dark text-primary-foreground">
         <CardTitle className="text-lg font-semibold flex items-center gap-2">
-          <Bot className="h-5 w-5" />
+          <div className="h-8 w-8 rounded-full bg-white/20 flex items-center justify-center">
+            <Bot className="h-5 w-5" />
+          </div>
           AI Assistant
         </CardTitle>
         <Button
           variant="ghost"
           size="icon"
           onClick={() => setIsOpen(false)}
+          className="hover:bg-white/20 text-primary-foreground"
         >
           <X className="h-4 w-4" />
         </Button>
       </CardHeader>
-      <CardContent className="flex-1 flex flex-col p-4 pt-0 gap-4">
-        <ScrollArea className="flex-1 pr-4">
+      <CardContent className="flex-1 flex flex-col p-0 gap-0">
+        <ScrollArea className="flex-1 p-4">
           <div className="space-y-4">
             {messages.map((message, index) => (
               <div
@@ -94,40 +97,47 @@ export default function AIAssistantChat({ portalType = "user" }: AIAssistantChat
                 }`}
               >
                 <div
-                  className={`max-w-[80%] rounded-lg px-4 py-2 ${
+                  className={`max-w-[85%] rounded-2xl px-4 py-3 shadow-sm ${
                     message.role === "user"
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-muted"
+                      ? "bg-primary text-primary-foreground rounded-br-sm"
+                      : "bg-muted text-foreground rounded-bl-sm border border-border"
                   }`}
                 >
-                  <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                  <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
                 </div>
               </div>
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-muted rounded-lg px-4 py-2">
-                  <Loader2 className="h-4 w-4 animate-spin" />
+                <div className="bg-muted rounded-2xl rounded-bl-sm px-4 py-3 border border-border">
+                  <div className="flex items-center gap-2">
+                    <Loader2 className="h-4 w-4 animate-spin text-primary" />
+                    <span className="text-sm text-muted-foreground">Thinking...</span>
+                  </div>
                 </div>
               </div>
             )}
           </div>
         </ScrollArea>
-        <div className="flex gap-2">
-          <Input
-            value={inputMessage}
-            onChange={(e) => setInputMessage(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder="Type your message..."
-            disabled={isLoading}
-          />
-          <Button
-            onClick={handleSendMessage}
-            size="icon"
-            disabled={isLoading || !inputMessage.trim()}
-          >
-            <Send className="h-4 w-4" />
-          </Button>
+        <div className="p-4 border-t bg-muted/30">
+          <div className="flex gap-2">
+            <Input
+              value={inputMessage}
+              onChange={(e) => setInputMessage(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder="Type your message..."
+              disabled={isLoading}
+              className="flex-1 rounded-full border-2 focus:border-primary transition-colors"
+            />
+            <Button
+              onClick={handleSendMessage}
+              size="icon"
+              disabled={isLoading || !inputMessage.trim()}
+              className="rounded-full h-10 w-10 bg-primary hover:bg-primary-dark transition-colors shadow-md"
+            >
+              <Send className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
       </CardContent>
     </Card>
