@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Bot, Send, X, Loader2, Sparkles } from "lucide-react";
-import { sendChatMessage, ChatMessage } from "@/lib/gemini";
+import { streamChatMessage, ChatMessage } from "@/lib/gemini";
 import { toast } from "sonner";
 
 interface AIAssistantChatProps {
@@ -21,6 +21,13 @@ export default function AIAssistantChat({ portalType = "user" }: AIAssistantChat
   ]);
   const [inputMessage, setInputMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [messages]);
 
   const handleSendMessage = async () => {
     if (!inputMessage.trim() || isLoading) return;
@@ -35,18 +42,22 @@ export default function AIAssistantChat({ portalType = "user" }: AIAssistantChat
     setMessages(newMessages);
     setIsLoading(true);
 
-    try {
-      const response = await sendChatMessage(userMessage, messages);
-      setMessages([
-        ...newMessages,
-        { role: "assistant", content: response },
-      ]);
-    } catch (error) {
-      toast.error("Failed to get response from AI assistant");
-      console.error("AI Assistant error:", error);
-    } finally {
-      setIsLoading(false);
-    }
+    let assistantContent = "";
+    const updateAssistantMessage = (chunk: string) => {
+      assistantContent += chunk;
+      setMessages([...newMessages, { role: "assistant", content: assistantContent }]);
+    };
+
+    streamChatMessage(
+      newMessages,
+      portalType,
+      updateAssistantMessage,
+      () => setIsLoading(false),
+      (error) => {
+        toast.error(error);
+        setIsLoading(false);
+      }
+    );
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -60,47 +71,47 @@ export default function AIAssistantChat({ portalType = "user" }: AIAssistantChat
     return (
       <Button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-br from-primary to-primary-dark hover:scale-110 z-50"
+        className="fixed bottom-6 right-6 h-16 w-16 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 bg-gradient-to-br from-primary via-primary to-secondary hover:scale-105 z-50 animate-in fade-in slide-in-from-bottom-4"
         size="icon"
       >
-        <Sparkles className="h-6 w-6 animate-pulse" />
+        <Sparkles className="h-7 w-7 animate-pulse text-white" />
       </Button>
     );
   }
 
   return (
-    <Card className="fixed bottom-6 right-6 w-96 h-[550px] shadow-2xl z-50 flex flex-col border-2 border-primary/20 overflow-hidden">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3 bg-gradient-to-r from-primary to-primary-dark text-primary-foreground">
-        <CardTitle className="text-lg font-semibold flex items-center gap-2">
-          <div className="h-8 w-8 rounded-full bg-white/20 flex items-center justify-center">
-            <Bot className="h-5 w-5" />
+    <Card className="fixed bottom-6 right-6 w-96 h-[600px] shadow-2xl z-50 flex flex-col border-2 border-primary/30 overflow-hidden animate-in fade-in slide-in-from-bottom-8 backdrop-blur-sm">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 pt-4 bg-gradient-to-br from-primary via-primary to-primary/90 text-primary-foreground">
+        <CardTitle className="text-lg font-bold flex items-center gap-3">
+          <div className="h-10 w-10 rounded-full bg-gradient-to-br from-white/30 to-white/10 flex items-center justify-center backdrop-blur-sm border border-white/20">
+            <Bot className="h-6 w-6 text-white" />
           </div>
-          AI Assistant
+          <span className="text-white">AI Assistant</span>
         </CardTitle>
         <Button
           variant="ghost"
           size="icon"
           onClick={() => setIsOpen(false)}
-          className="hover:bg-white/20 text-primary-foreground"
+          className="hover:bg-white/20 text-white h-8 w-8 rounded-full transition-all"
         >
-          <X className="h-4 w-4" />
+          <X className="h-5 w-5" />
         </Button>
       </CardHeader>
-      <CardContent className="flex-1 flex flex-col p-0 gap-0">
-        <ScrollArea className="flex-1 p-4">
+      <CardContent className="flex-1 flex flex-col p-0 gap-0 bg-background/50 backdrop-blur-sm">
+        <ScrollArea className="flex-1 p-4" ref={scrollRef}>
           <div className="space-y-4">
             {messages.map((message, index) => (
               <div
                 key={index}
                 className={`flex ${
                   message.role === "user" ? "justify-end" : "justify-start"
-                }`}
+                } animate-in fade-in slide-in-from-bottom-2`}
               >
                 <div
-                  className={`max-w-[85%] rounded-2xl px-4 py-3 shadow-sm ${
+                  className={`max-w-[85%] rounded-2xl px-4 py-3 shadow-lg transition-all ${
                     message.role === "user"
-                      ? "bg-primary text-primary-foreground rounded-br-sm"
-                      : "bg-muted text-foreground rounded-bl-sm border border-border"
+                      ? "bg-gradient-to-br from-primary to-primary/90 text-white rounded-br-sm"
+                      : "bg-card text-card-foreground rounded-bl-sm border-2 border-border"
                   }`}
                 >
                   <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
@@ -108,34 +119,34 @@ export default function AIAssistantChat({ portalType = "user" }: AIAssistantChat
               </div>
             ))}
             {isLoading && (
-              <div className="flex justify-start">
-                <div className="bg-muted rounded-2xl rounded-bl-sm px-4 py-3 border border-border">
+              <div className="flex justify-start animate-in fade-in">
+                <div className="bg-card rounded-2xl rounded-bl-sm px-4 py-3 border-2 border-border shadow-lg">
                   <div className="flex items-center gap-2">
                     <Loader2 className="h-4 w-4 animate-spin text-primary" />
-                    <span className="text-sm text-muted-foreground">Thinking...</span>
+                    <span className="text-sm text-muted-foreground font-medium">Thinking...</span>
                   </div>
                 </div>
               </div>
             )}
           </div>
         </ScrollArea>
-        <div className="p-4 border-t bg-muted/30">
+        <div className="p-4 border-t-2 bg-card/80 backdrop-blur-sm">
           <div className="flex gap-2">
             <Input
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Type your message..."
+              placeholder="Ask me anything..."
               disabled={isLoading}
-              className="flex-1 rounded-full border-2 focus:border-primary transition-colors"
+              className="flex-1 rounded-full border-2 focus:border-primary transition-all bg-background/50 backdrop-blur-sm h-11 px-5"
             />
             <Button
               onClick={handleSendMessage}
               size="icon"
               disabled={isLoading || !inputMessage.trim()}
-              className="rounded-full h-10 w-10 bg-primary hover:bg-primary-dark transition-colors shadow-md"
+              className="rounded-full h-11 w-11 bg-gradient-to-br from-primary to-primary/90 hover:from-primary/90 hover:to-primary transition-all shadow-lg disabled:opacity-50"
             >
-              <Send className="h-4 w-4" />
+              <Send className="h-5 w-5 text-white" />
             </Button>
           </div>
         </div>
