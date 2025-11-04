@@ -42,18 +42,36 @@ export default function AIAssistantChat({ portalType = "user" }: AIAssistantChat
     setMessages(newMessages);
     setIsLoading(true);
 
-    let assistantContent = "";
-    const updateAssistantMessage = (chunk: string) => {
-      assistantContent += chunk;
-      setMessages([...newMessages, { role: "assistant", content: assistantContent }]);
-    };
+    console.log("Sending message to AI:", userMessage);
 
+    let assistantContent = "";
+    
     streamChatMessage(
       newMessages,
       portalType,
-      updateAssistantMessage,
-      () => setIsLoading(false),
+      (chunk: string) => {
+        console.log("Received chunk:", chunk);
+        assistantContent += chunk;
+        setMessages((prevMessages) => {
+          const lastMessage = prevMessages[prevMessages.length - 1];
+          if (lastMessage?.role === "assistant") {
+            // Update existing assistant message
+            return [
+              ...prevMessages.slice(0, -1),
+              { role: "assistant", content: assistantContent }
+            ];
+          } else {
+            // Add new assistant message
+            return [...prevMessages, { role: "assistant", content: assistantContent }];
+          }
+        });
+      },
+      () => {
+        console.log("Stream completed");
+        setIsLoading(false);
+      },
       (error) => {
+        console.error("AI error:", error);
         toast.error(error);
         setIsLoading(false);
       }
