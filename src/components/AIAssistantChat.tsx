@@ -112,8 +112,8 @@ export default function AIAssistantChat({ portalType = "user" }: AIAssistantChat
   }
 
   return (
-    <Card className="fixed bottom-6 right-6 w-96 h-[600px] shadow-2xl z-50 flex flex-col border-2 border-primary/30 overflow-hidden animate-in fade-in slide-in-from-bottom-8 backdrop-blur-sm">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 pt-4 bg-gradient-to-br from-primary via-primary to-primary/90 text-primary-foreground">
+    <Card className="fixed bottom-6 right-6 w-96 h-[600px] shadow-2xl z-50 flex flex-col border-2 border-primary/30 animate-in fade-in slide-in-from-bottom-8 backdrop-blur-sm">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 pt-4 bg-gradient-to-br from-primary via-primary to-primary/90 text-primary-foreground flex-shrink-0">
         <CardTitle className="text-lg font-bold flex items-center gap-3">
           <div className="h-10 w-10 rounded-full bg-gradient-to-br from-white/30 to-white/10 flex items-center justify-center backdrop-blur-sm border border-white/20">
             <Bot className="h-6 w-6 text-white" />
@@ -129,7 +129,7 @@ export default function AIAssistantChat({ portalType = "user" }: AIAssistantChat
           <X className="h-5 w-5" />
         </Button>
       </CardHeader>
-      <CardContent className="flex-1 flex flex-col p-0 gap-0 bg-background/50 backdrop-blur-sm">
+      <CardContent className="flex-1 flex flex-col p-0 min-h-0 bg-background/50 backdrop-blur-sm">
         <ScrollArea className="flex-1 p-4" ref={scrollRef}>
           <div className="space-y-4">
             {messages.map((message, index) => (
@@ -162,7 +162,7 @@ export default function AIAssistantChat({ portalType = "user" }: AIAssistantChat
             )}
           </div>
         </ScrollArea>
-        <div className="p-4 border-t-2 bg-card/80 backdrop-blur-sm">
+        <div className="p-4 border-t-2 bg-card/80 backdrop-blur-sm flex-shrink-0">
           <div className="flex gap-2">
             <Input
               value={inputMessage}
