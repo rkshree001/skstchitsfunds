@@ -42,40 +42,54 @@ export default function AIAssistantChat({ portalType = "user" }: AIAssistantChat
     setMessages(newMessages);
     setIsLoading(true);
 
-    console.log("Sending message to AI:", userMessage);
+    console.log("=== Starting AI Chat ===");
+    console.log("User message:", userMessage);
+    console.log("Portal type:", portalType);
 
     let assistantContent = "";
     
-    streamChatMessage(
-      newMessages,
-      portalType,
-      (chunk: string) => {
-        console.log("Received chunk:", chunk);
-        assistantContent += chunk;
-        setMessages((prevMessages) => {
-          const lastMessage = prevMessages[prevMessages.length - 1];
-          if (lastMessage?.role === "assistant") {
-            // Update existing assistant message
-            return [
-              ...prevMessages.slice(0, -1),
-              { role: "assistant", content: assistantContent }
-            ];
-          } else {
-            // Add new assistant message
-            return [...prevMessages, { role: "assistant", content: assistantContent }];
-          }
-        });
-      },
-      () => {
-        console.log("Stream completed");
-        setIsLoading(false);
-      },
-      (error) => {
-        console.error("AI error:", error);
-        toast.error(error);
-        setIsLoading(false);
-      }
-    );
+    try {
+      await streamChatMessage(
+        newMessages,
+        portalType,
+        (chunk: string) => {
+          console.log("✓ Received chunk:", chunk);
+          assistantContent += chunk;
+          setMessages((prevMessages) => {
+            const lastMessage = prevMessages[prevMessages.length - 1];
+            if (lastMessage?.role === "assistant") {
+              return [
+                ...prevMessages.slice(0, -1),
+                { role: "assistant", content: assistantContent }
+              ];
+            } else {
+              return [...prevMessages, { role: "assistant", content: assistantContent }];
+            }
+          });
+        },
+        () => {
+          console.log("✓ Stream completed successfully");
+          setIsLoading(false);
+        },
+        (error) => {
+          console.error("✗ AI error:", error);
+          toast.error(`AI Error: ${error}`);
+          setMessages(prev => [
+            ...prev,
+            { role: "assistant", content: "Sorry, I encountered an error. Please try again." }
+          ]);
+          setIsLoading(false);
+        }
+      );
+    } catch (error) {
+      console.error("✗ Unexpected error in handleSendMessage:", error);
+      toast.error("Failed to send message");
+      setMessages(prev => [
+        ...prev,
+        { role: "assistant", content: "Sorry, I encountered an unexpected error. Please try again." }
+      ]);
+      setIsLoading(false);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {

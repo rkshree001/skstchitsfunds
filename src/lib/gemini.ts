@@ -11,10 +11,12 @@ export async function streamChatMessage(
   onError: (error: string) => void
 ): Promise<void> {
   try {
-    console.log("Starting stream chat message...");
+    console.log("📡 Starting stream chat request");
     const SUPABASE_URL = "https://sfzvqmtnyymmveuutswp.supabase.co";
     const CHAT_URL = `${SUPABASE_URL}/functions/v1/ai-chat`;
-    console.log("Chat URL:", CHAT_URL);
+    console.log("📍 Chat URL:", CHAT_URL);
+    console.log("📝 Sending messages:", messages);
+    console.log("🏢 Portal type:", portalType);
     
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNmenZxbXRueXltbXZldXV0c3dwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIyNTY2NzUsImV4cCI6MjA3NzgzMjY3NX0.qKXURc4SDSSPQTjQf-1Wep-B4WHmeMm4bf6h-5VlRE0";
     
@@ -27,7 +29,8 @@ export async function streamChatMessage(
       body: JSON.stringify({ messages, portalType }),
     });
 
-    console.log("Response status:", response.status);
+    console.log("📊 Response status:", response.status);
+    console.log("📋 Response headers:", Object.fromEntries(response.headers.entries()));
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
