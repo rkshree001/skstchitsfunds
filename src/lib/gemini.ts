@@ -12,14 +12,17 @@ export async function streamChatMessage(
 ): Promise<void> {
   try {
     console.log("Starting stream chat message...");
-    const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ai-chat`;
+    const SUPABASE_URL = "https://sfzvqmtnyymmveuutswp.supabase.co";
+    const CHAT_URL = `${SUPABASE_URL}/functions/v1/ai-chat`;
     console.log("Chat URL:", CHAT_URL);
+    
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNmenZxbXRueXltbXZldXV0c3dwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIyNTY2NzUsImV4cCI6MjA3NzgzMjY3NX0.qKXURc4SDSSPQTjQf-1Wep-B4WHmeMm4bf6h-5VlRE0";
     
     const response = await fetch(CHAT_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
       },
       body: JSON.stringify({ messages, portalType }),
     });
